@@ -10,7 +10,7 @@ export default function Layout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const sectionDivClass = twMerge("bg-[#121212]", "rounded-sm");
+  const sectionDivClass = twMerge("bg-[#121212]", "rounded-[8px]");
 
   return (
     <div
@@ -21,7 +21,8 @@ export default function Layout({
         "absolute",
         "w-[100%]",
         "bg-[#000000]",
-        "flex flex-row gap-[10px]"
+        "flex flex-row gap-[10px]",
+        "p-[8px]"
       )}
     >
       <div className={twMerge(sectionDivClass, "w-[18%]", "h-[100%]")}>123</div>

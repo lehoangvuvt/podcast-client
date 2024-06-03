@@ -12,6 +12,10 @@ export type Genre = {
   bg_image: string;
 };
 
+export type GenreDetails = {
+  podcasts: Podcast[];
+} & Genre;
+
 export type Podcast = {
   id: number;
   uuid: string;
@@ -56,4 +60,8 @@ export type GetAllPodcastsSuccessResponse = {
 
 export type GetPodcastDetailsSuccessResponse = {
   podcast_details: PodcastDetails;
+};
+
+export type GetGenreDetailsSuccessResponse = {
+  genre_details: GenreDetails;
 };

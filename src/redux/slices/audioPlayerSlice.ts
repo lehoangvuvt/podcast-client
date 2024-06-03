@@ -28,6 +28,19 @@ const audioPlayerSlice = createSlice({
     playAudio(state) {
       state.playerState = "PLAYING";
     },
+    playNext(state) {
+      if (state.currentPodcast) {
+        const lastEpNo = state.currentPodcast.episodes.toSorted((a, b) => {
+          return b.episode_no - a.episode_no;
+        })[0].episode_no;
+        if (state.currentEpisodeNo < lastEpNo) {
+          state.currentEpisodeNo += 1;
+          state.playerState = "PLAYING";
+        } else {
+          state.playerState = "STOP";
+        }
+      }
+    },
     pauseAudio(state) {
       state.playerState = "PAUSED";
     },
@@ -37,6 +50,6 @@ const audioPlayerSlice = createSlice({
   },
 });
 
-export const { setCurrentEpisode, playAudio, pauseAudio, stopAudio } =
+export const { setCurrentEpisode, playAudio, pauseAudio, stopAudio, playNext } =
   audioPlayerSlice.actions;
 export default audioPlayerSlice.reducer;

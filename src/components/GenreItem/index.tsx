@@ -1,5 +1,6 @@
 "use client";
 
+import useCustomRouter from "@/hooks/useCustomRouter";
 import { Genre } from "@/types/apiResponse";
 import { twMerge } from "tailwind-merge";
 
@@ -9,8 +10,13 @@ type Props = {
 };
 
 const GenreItem: React.FC<Props> = ({ genre, width = "20%" }) => {
+  const { pushRouteWithHistory } = useCustomRouter();
+
   return (
     <div
+      onClick={() => {
+        pushRouteWithHistory(`/home/genres/${genre.uuid}`);
+      }}
       className={twMerge(
         "aspect-video",
         "font-bold",

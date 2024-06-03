@@ -12,6 +12,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { twMerge } from "tailwind-merge";
 import PlayArrowIcon from "@mui/icons-material/PlayArrow";
 import PauseIcon from "@mui/icons-material/Pause";
+import Lottie from "react-lottie";
+import * as animationData from "@/lotties/spectrum-lottie.json";
 
 type Props = {
   podcastDetails: PodcastDetails;
@@ -21,6 +23,14 @@ type Props = {
 const EpisodeItem: React.FC<Props> = ({ episode, podcastDetails }) => {
   const dispatch = useDispatch();
   const audioPlayerSlice = useSelector((state: State) => state.audioPlayer);
+  const lottieOptions = {
+    loop: true,
+    autoplay: true,
+    animationData: animationData,
+    rendererSettings: {
+      preserveAspectRatio: "xMidYMid slice",
+    },
+  };
 
   return (
     <div
@@ -30,6 +40,7 @@ const EpisodeItem: React.FC<Props> = ({ episode, podcastDetails }) => {
         "py-[20px] px-[30px]",
         "cursor-pointer",
         "transition-all",
+        "border-b-white",
         "hover:bg-[rgba(255,255,255,0.07)]"
       )}
     >
@@ -75,9 +86,23 @@ const EpisodeItem: React.FC<Props> = ({ episode, podcastDetails }) => {
           "h-[80px]",
           "flex flex-row",
           "items-center",
-          "justify-end"
+          "justify-between"
         )}
       >
+        <div className="spectrum">
+          {audioPlayerSlice.currentPodcast?.episodes.find(
+            (ele) => ele.episode_no === audioPlayerSlice.currentEpisodeNo
+          )?.uuid === episode.uuid &&
+            audioPlayerSlice.playerState === "PLAYING" && (
+              <Lottie
+                options={lottieOptions}
+                height={30}
+                width={60}
+                isStopped={false}
+                isPaused={false}
+              />
+            )}
+        </div>
         <button
           onClick={() => {
             if (

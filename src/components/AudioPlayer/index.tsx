@@ -3,10 +3,15 @@
 import styled from "styled-components";
 import AudioPlayer from "react-h5-audio-player";
 import "react-h5-audio-player/lib/styles.css";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { State } from "@/redux/store";
 import { useEffect, useRef } from "react";
 import useCustomRouter from "@/hooks/useCustomRouter";
+import {
+  pauseAudio,
+  playAudio,
+  playNext,
+} from "@/redux/slices/audioPlayerSlice";
 
 const CustomAudioPlayer = styled(AudioPlayer)`
   .rhap_current-time,
@@ -19,6 +24,7 @@ const CustomAudioPlayer = styled(AudioPlayer)`
 const MyAudioPlayer = () => {
   const audioPlayerRef = useRef<AudioPlayer>(null);
   const audioPlayerSlice = useSelector((state: State) => state.audioPlayer);
+  const dispatch = useDispatch();
   const { pushRouteWithHistory } = useCustomRouter();
 
   useEffect(() => {
@@ -29,24 +35,36 @@ const MyAudioPlayer = () => {
   useEffect(() => {
     switch (audioPlayerSlice.playerState) {
       case "PAUSED":
-        pauseAudio();
+        handlePauseAudio();
         break;
       case "PLAYING":
-        playAudio();
+        handlePlayAudio();
         break;
     }
   }, [audioPlayerSlice]);
 
-  const pauseAudio = () => {
+  const handlePauseAudio = () => {
     if (audioPlayerRef && audioPlayerRef.current) {
       audioPlayerRef.current.audio.current?.pause();
     }
   };
 
-  const playAudio = () => {
+  const handlePlayAudio = () => {
     if (audioPlayerRef && audioPlayerRef.current) {
       audioPlayerRef.current.audio.current?.play();
     }
+  };
+
+  const handleOnPause = () => {
+    dispatch(pauseAudio());
+  };
+
+  const handleOnPlaying = () => {
+    dispatch(playAudio());
+  };
+
+  const handleOnEnded = () => {
+    dispatch(playNext());
   };
 
   return (
@@ -81,6 +99,9 @@ const MyAudioPlayer = () => {
         </div>
       </div>
       <CustomAudioPlayer
+        onPause={handleOnPause}
+        onPlaying={handleOnPlaying}
+        onEnded={handleOnEnded}
         autoPlay={false}
         ref={audioPlayerRef}
         src={

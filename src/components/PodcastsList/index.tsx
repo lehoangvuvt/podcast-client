@@ -6,11 +6,16 @@ import MySkeleton, { SHAPE_ENUMS } from "../Skeleton";
 import PodcastsService from "@/services/podcasts.service";
 import PodcastItem from "../PodcastItem";
 
-const PodcastsList = () => {
-  const [podcasts, setPodcasts] = useState<Podcast[]>([]);
-  const [isLoading, setLoading] = useState(true);
+type Props = {
+  externalData?: Podcast[] | null;
+};
+
+const PodcastsList: React.FC<Props> = ({ externalData = null }) => {
+  const [podcasts, setPodcasts] = useState<Podcast[]>(externalData ?? []);
+  const [isLoading, setLoading] = useState(externalData ? false : true);
 
   useEffect(() => {
+    if (externalData) return;
     const getAllPodcasts = async () => {
       const response = await PodcastsService.GetAllPodcasts();
       if (response.status === "success") {
@@ -19,7 +24,7 @@ const PodcastsList = () => {
       setLoading(false);
     };
     getAllPodcasts();
-  }, []);
+  }, [externalData]);
 
   return (
     <div className="w-full flex flex-row flex-wrap gap-[15px] p-[15px]">
@@ -27,12 +32,12 @@ const PodcastsList = () => {
         Array(10)
           .fill("")
           .map((_, i) => (
-            <MySkeleton shape={SHAPE_ENUMS.SQUARE} key={i} width="18%" />
+            <MySkeleton shape={SHAPE_ENUMS.SQUARE} key={i} width="20%" />
           ))}
       {!isLoading &&
         podcasts?.length > 0 &&
         podcasts.map((podcast) => (
-          <PodcastItem width="18%" key={podcast.id} podcast={podcast} />
+          <PodcastItem width="20%" key={podcast.id} podcast={podcast} />
         ))}
     </div>
   );
