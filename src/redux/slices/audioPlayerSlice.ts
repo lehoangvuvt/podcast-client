@@ -1,14 +1,16 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { SLICE_NAMES } from "../consts";
-import { PodcastEpisode } from "@/types/apiResponse";
+import { PodcastDetails } from "@/types/apiResponse";
 
 type State = {
-  currentEpisode: PodcastEpisode | null;
+  currentPodcast: PodcastDetails | null;
+  currentEpisodeNo: number;
   playerState: "PAUSED" | "PLAYING" | "STOP";
 };
 
 const initialState: State = {
-  currentEpisode: null,
+  currentPodcast: null,
+  currentEpisodeNo: 0,
   playerState: "STOP",
 };
 
@@ -16,8 +18,12 @@ const audioPlayerSlice = createSlice({
   name: SLICE_NAMES.AUDIO_PLAYER,
   initialState,
   reducers: {
-    setCurrentEpisode(state, action) {
-      state.currentEpisode = action.payload;
+    setCurrentEpisode(
+      state,
+      action: { payload: { podcastDetails: PodcastDetails; episodeNo: number } }
+    ) {
+      state.currentPodcast = action.payload.podcastDetails;
+      state.currentEpisodeNo = action.payload.episodeNo;
     },
     playAudio(state) {
       state.playerState = "PLAYING";
