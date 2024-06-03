@@ -21,8 +21,8 @@ const useCustomRouter = () => {
   const pushRouteWithHistory = (path: string) => {
     if (path !== routesHistorySlice.routes[routesHistorySlice.currRouteIndex]) {
       dispatch(addNewRoute(path));
-      router.push(path);
     }
+    router.push(path);
   };
 
   const backRoute = () => {
