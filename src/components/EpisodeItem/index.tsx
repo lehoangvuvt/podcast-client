@@ -34,13 +34,15 @@ const EpisodeItem: React.FC<Props> = ({ episode, podcastDetails }) => {
 
   return (
     <div
+      style={{
+        borderBottom: "1px solid rgba(255,255,255,0.2)",
+      }}
       className={twMerge(
         "w-full",
         "flex flex-col",
         "py-[20px] px-[30px]",
         "cursor-pointer",
         "transition-all",
-        "border-b-white",
         "hover:bg-[rgba(255,255,255,0.07)]"
       )}
     >

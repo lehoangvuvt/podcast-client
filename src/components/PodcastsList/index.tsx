@@ -37,7 +37,7 @@ const PodcastsList: React.FC<Props> = ({ externalData = null }) => {
       {!isLoading &&
         podcasts?.length > 0 &&
         podcasts.map((podcast) => (
-          <PodcastItem width="20%" key={podcast.id} podcast={podcast} />
+          <PodcastItem width={"20%"} key={podcast.id} podcast={podcast} />
         ))}
     </div>
   );

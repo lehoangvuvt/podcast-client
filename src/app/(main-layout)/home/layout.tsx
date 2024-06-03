@@ -69,9 +69,6 @@ export default function Layout({
         </div>
       </div>
       <div className={twMerge("w-full", "mt-[40px]")}>{children}</div>
-      <div className="fixed bottom-0 left-0 z-[100] w-full h-[100px] bg-[#000000] flex items-center justify-center">
-        <MyAudioPlayer />
-      </div>
     </div>
   );
 }

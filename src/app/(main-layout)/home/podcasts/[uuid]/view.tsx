@@ -66,7 +66,7 @@ const PodcastDetailsView: React.FC<Props> = ({ details }) => {
         style={{
           backgroundImage: `linear-gradient(to bottom,${dominantColor}, 0.1%, black)`,
         }}
-        className="w-full flex flex-col gap-[10px]"
+        className="w-full flex flex-col"
       >
         {details.episodes?.length > 0 &&
           details.episodes.map((ep, _) => (
