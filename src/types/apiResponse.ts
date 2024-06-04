@@ -52,6 +52,12 @@ export type PodcastEpisodeDetails = {
   podcast: Podcast;
 } & PodcastEpisode;
 
+export type SearchResult = {
+  podcasts: Podcast[] | null;
+  episodes: PodcastEpisodeDetails[] | null;
+  genres: Genre[] | null;
+};
+
 export type LoginSuccessResponse = UserInfo;
 
 export type GetAllGenresSuccessResponse = {
@@ -72,4 +78,8 @@ export type GetGenreDetailsSuccessResponse = {
 
 export type GetEpisodeDetailsSuccessResponse = {
   episode_details: PodcastEpisodeDetails;
+};
+
+export type SearchItemsSuccessResponse = {
+  result: SearchResult;
 };

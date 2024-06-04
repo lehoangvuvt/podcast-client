@@ -1,6 +1,6 @@
 "use client";
 
-import { PodcastDetails, PodcastEpisode } from "@/types/apiResponse";
+import { Podcast, PodcastDetails, PodcastEpisode } from "@/types/apiResponse";
 import React from "react";
 import { twMerge } from "tailwind-merge";
 import useCustomRouter from "@/hooks/useCustomRouter";
@@ -8,11 +8,16 @@ import AudioPlayButton from "../AudioPlayButton";
 import moment from "moment";
 
 type Props = {
-  podcastDetails: PodcastDetails;
+  podcastDetails?: PodcastDetails;
+  podcast?: Podcast;
   episode: PodcastEpisode;
 };
 
-const EpisodeItem: React.FC<Props> = ({ episode, podcastDetails }) => {
+const EpisodeItem: React.FC<Props> = ({
+  episode,
+  podcastDetails = null,
+  podcast = null,
+}) => {
   const { pushRouteWithHistory } = useCustomRouter();
 
   return (
@@ -39,7 +44,13 @@ const EpisodeItem: React.FC<Props> = ({ episode, podcastDetails }) => {
           style={{
             backgroundSize: "cover",
             backgroundPosition: "center",
-            backgroundImage: `url(${podcastDetails.thumbnail_url})`,
+            backgroundImage: `url(${
+              podcastDetails
+                ? podcastDetails.thumbnail_url
+                : podcast
+                ? podcast.thumbnail_url
+                : ""
+            })`,
           }}
         />
         <div className="flex-1 flex-col pl-[15px]">
@@ -78,10 +89,12 @@ const EpisodeItem: React.FC<Props> = ({ episode, podcastDetails }) => {
           "justify-end"
         )}
       >
-        <AudioPlayButton
-          episode={{ mode: "PLAYLIST", details: episode }}
-          podcastDetails={podcastDetails}
-        />
+        {podcastDetails && (
+          <AudioPlayButton
+            episode={{ mode: "PLAYLIST", details: episode }}
+            podcastDetails={podcastDetails}
+          />
+        )}
       </div>
     </div>
   );

@@ -24,7 +24,7 @@ const PodcastItem: React.FC<Props> = ({ podcast, width = "20%" }) => {
         "rounded-sm",
         "cursor-pointer",
         "transition-all",
-        "hover:bg-[rgba(255,255,255,0.05)]",
+        "hover:bg-[rgba(255,255,255,0.1)]",
         "p-[10px]"
       )}
     >
