@@ -1,7 +1,4 @@
-import {
-  LoginSuccessResponse,
-  SearchItemsSuccessResponse,
-} from "@/types/apiResponse";
+import { SearchItemsSuccessResponse } from "@/types/apiResponse";
 import baseAxios from "./axiosClient";
 
 const baseServiceURL = "/search";

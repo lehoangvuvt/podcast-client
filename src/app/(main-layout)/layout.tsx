@@ -58,7 +58,7 @@ export default function Layout({
               className={baseHeaderLinkClass}
             >
               <HomeOutlinedIcon
-                style={{ fontSize: "28px" }}
+                style={{ fontSize: "26px" }}
                 fontSize="inherit"
               />
               Home
@@ -72,7 +72,7 @@ export default function Layout({
               className={baseHeaderLinkClass}
             >
               <SearchOutlinedIcon
-                style={{ fontSize: "28px" }}
+                style={{ fontSize: "26px" }}
                 fontSize="inherit"
               />
               Search

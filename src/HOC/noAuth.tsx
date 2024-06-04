@@ -12,7 +12,7 @@ const noAuth = (WrappedComponent: React.FC) => {
     useEffect(() => {
       if (isLoading) return;
       if (user?.userInfo) {
-        pushRoute("/home/genres");
+        pushRoute("/home");
       }
     }, [user, pushRoute, isLoading]);
 

@@ -23,7 +23,7 @@ const withAuth = (WrappedComponent: React.FC) => {
         const authenticate = async () => {
           const response = await UsersService.Authenticate();
           if (response.status === "fail") {
-            pushRoute("/home/genres");
+            pushRoute("/home");
           }
           setLoading(false);
         };

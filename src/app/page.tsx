@@ -7,7 +7,7 @@ export default function Home() {
   const { pushRoute } = useCustomRouter();
 
   useEffect(() => {
-    pushRoute("/home/genres");
+    pushRoute("/home");
   }, [pushRoute]);
 
   return null;
