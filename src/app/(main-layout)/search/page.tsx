@@ -11,7 +11,7 @@ import { twMerge } from "tailwind-merge";
 const SearchPage = () => {
   const searchParams = useSearchParams();
   const dbTimeout = useRef<any>(null);
-  const [q, setQ] = useState("");
+  const [q, setQ] = useState(searchParams.get("q") ?? "");
   const [result, setResult] = useState<SearchResult | null>(null);
 
   const search = useCallback(async (value: string) => {
@@ -22,26 +22,13 @@ const SearchPage = () => {
   }, []);
 
   useEffect(() => {
-    if (
-      searchParams &&
-      searchParams.has("q") &&
-      typeof searchParams.get("q") === "string"
-    ) {
-      setQ(searchParams.get("q") as string);
-    } else {
-      setQ("");
-      setResult(null);
-    }
-  }, [searchParams]);
-
-  useEffect(() => {
     if (dbTimeout && dbTimeout.current) {
       clearTimeout(dbTimeout.current);
     }
 
     dbTimeout.current = setTimeout(() => {
       if (q.trim().length === 0) {
-        window.history.replaceState({}, "", `/search?q=${q}`);
+        window.history.replaceState({}, "", `/search`);
         return;
       }
       window.history.replaceState({}, "", `/search?q=${q}`);
