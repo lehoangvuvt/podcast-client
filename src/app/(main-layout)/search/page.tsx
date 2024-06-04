@@ -2,11 +2,12 @@
 
 import EpisodeItem from "@/components/EpisodeItem";
 import PodcastItem from "@/components/PodcastItem";
-import useCustomRouter from "@/hooks/useCustomRouter";
+import { addNewRoute } from "@/redux/slices/routesHistorySlice";
 import SearchService from "@/services/search.service";
 import { SearchResult } from "@/types/apiResponse";
 import { useSearchParams } from "next/navigation";
-import { FormEvent, useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
+import { useDispatch } from "react-redux";
 import { twMerge } from "tailwind-merge";
 
 const SearchPage = () => {
@@ -14,7 +15,7 @@ const SearchPage = () => {
   const dbTimeout = useRef<any>(null);
   const [q, setQ] = useState("");
   const [result, setResult] = useState<SearchResult | null>(null);
-  const { pushRouteWithHistory } = useCustomRouter();
+  const dispatch = useDispatch();
 
   const search = useCallback(async (value: string) => {
     const response = await SearchService.SearchItems(value);
@@ -43,12 +44,14 @@ const SearchPage = () => {
 
     dbTimeout.current = setTimeout(() => {
       if (q.trim().length === 0) {
-        pushRouteWithHistory(`/search`);
+        window.history.replaceState({}, "", `/search?q=${q}`);
+        dispatch(addNewRoute(`/search`));
         return;
       }
-      pushRouteWithHistory(`/search?q=${q}`);
-    }, 250);
-  }, [q]);
+      window.history.replaceState({}, "", `/search?q=${q}`);
+      dispatch(addNewRoute(`/search?q=${q}`));
+    }, 200);
+  }, [q, dispatch]);
 
   useEffect(() => {
     const qParam = searchParams.get("q");
