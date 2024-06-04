@@ -1,19 +1,10 @@
 "use client";
 
-import {
-  pauseAudio,
-  playAudio,
-  setCurrentEpisode,
-} from "@/redux/slices/audioPlayerSlice";
-import { State } from "@/redux/store";
 import { PodcastDetails, PodcastEpisode } from "@/types/apiResponse";
 import React from "react";
-import { useDispatch, useSelector } from "react-redux";
 import { twMerge } from "tailwind-merge";
-import PlayArrowIcon from "@mui/icons-material/PlayArrow";
-import PauseIcon from "@mui/icons-material/Pause";
-import Lottie from "react-lottie";
-import * as animationData from "@/lotties/spectrum-lottie.json";
+import useCustomRouter from "@/hooks/useCustomRouter";
+import AudioPlayButton from "../AudioPlayButton";
 
 type Props = {
   podcastDetails: PodcastDetails;
@@ -21,19 +12,11 @@ type Props = {
 };
 
 const EpisodeItem: React.FC<Props> = ({ episode, podcastDetails }) => {
-  const dispatch = useDispatch();
-  const audioPlayerSlice = useSelector((state: State) => state.audioPlayer);
-  const lottieOptions = {
-    loop: true,
-    autoplay: true,
-    animationData: animationData,
-    rendererSettings: {
-      preserveAspectRatio: "xMidYMid slice",
-    },
-  };
+  const { pushRouteWithHistory } = useCustomRouter();
 
   return (
     <div
+      onClick={() => pushRouteWithHistory(`/home/episodes/${episode.uuid}`)}
       style={{
         borderBottom: "1px solid rgba(255,255,255,0.2)",
       }}
@@ -88,77 +71,13 @@ const EpisodeItem: React.FC<Props> = ({ episode, podcastDetails }) => {
           "h-[80px]",
           "flex flex-row",
           "items-center",
-          "justify-between"
+          "justify-end"
         )}
       >
-        <div className="spectrum">
-          {audioPlayerSlice.currentPodcast?.episodes.find(
-            (ele) => ele.episode_no === audioPlayerSlice.currentEpisodeNo
-          )?.uuid === episode.uuid &&
-            audioPlayerSlice.playerState === "PLAYING" && (
-              <Lottie
-                options={lottieOptions}
-                height={30}
-                width={60}
-                isStopped={false}
-                isPaused={false}
-              />
-            )}
-        </div>
-        <button
-          onClick={() => {
-            if (
-              audioPlayerSlice.currentPodcast?.episodes.find(
-                (ele) => ele.episode_no === audioPlayerSlice.currentEpisodeNo
-              )?.uuid === episode.uuid
-            ) {
-              switch (audioPlayerSlice.playerState) {
-                case "PLAYING":
-                  dispatch(pauseAudio());
-                  break;
-                case "PAUSED":
-                  dispatch(playAudio());
-                  break;
-                case "STOP":
-                  dispatch(
-                    setCurrentEpisode({
-                      episodeNo: episode.episode_no,
-                      podcastDetails,
-                    })
-                  );
-                  dispatch(playAudio());
-                  break;
-              }
-            } else {
-              dispatch(
-                setCurrentEpisode({
-                  episodeNo: episode.episode_no,
-                  podcastDetails,
-                })
-              );
-              dispatch(playAudio());
-            }
-          }}
-          className={twMerge(
-            "rounded-full",
-            "w-[35px]",
-            "h-[35px]",
-            "bg-[white]",
-            "flex",
-            "items-center",
-            "justify-center",
-            "cursor-pointer"
-          )}
-        >
-          {audioPlayerSlice.currentPodcast?.episodes.find(
-            (ele) => ele.episode_no === audioPlayerSlice.currentEpisodeNo
-          )?.uuid === episode.uuid &&
-          audioPlayerSlice.playerState === "PLAYING" ? (
-            <PauseIcon />
-          ) : (
-            <PlayArrowIcon />
-          )}
-        </button>
+        <AudioPlayButton
+          episode={{ mode: "PLAYLIST", details: episode }}
+          podcastDetails={podcastDetails}
+        />
       </div>
     </div>
   );

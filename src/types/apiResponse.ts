@@ -48,6 +48,10 @@ export type PodcastEpisode = {
   created_at: string;
 };
 
+export type PodcastEpisodeDetails = {
+  podcast: Podcast;
+} & PodcastEpisode;
+
 export type LoginSuccessResponse = UserInfo;
 
 export type GetAllGenresSuccessResponse = {
@@ -64,4 +68,8 @@ export type GetPodcastDetailsSuccessResponse = {
 
 export type GetGenreDetailsSuccessResponse = {
   genre_details: GenreDetails;
+};
+
+export type GetEpisodeDetailsSuccessResponse = {
+  episode_details: PodcastEpisodeDetails;
 };

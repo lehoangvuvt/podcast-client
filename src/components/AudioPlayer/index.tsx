@@ -11,6 +11,7 @@ import {
   pauseAudio,
   playAudio,
   playNext,
+  playPrev,
 } from "@/redux/slices/audioPlayerSlice";
 
 const CustomAudioPlayer = styled(AudioPlayer)`
@@ -40,8 +41,22 @@ const MyAudioPlayer = () => {
       case "PLAYING":
         handlePlayAudio();
         break;
+      case "STOP":
+        handleStopAudio();
+        break;
     }
   }, [audioPlayerSlice]);
+
+  const handleStopAudio = () => {
+    if (
+      audioPlayerRef &&
+      audioPlayerRef.current &&
+      audioPlayerRef.current.audio.current
+    ) {
+      audioPlayerRef.current.audio.current.pause();
+      audioPlayerRef.current.audio.current.currentTime = 0;
+    }
+  };
 
   const handlePauseAudio = () => {
     if (audioPlayerRef && audioPlayerRef.current) {
@@ -64,7 +79,9 @@ const MyAudioPlayer = () => {
   };
 
   const handleOnEnded = () => {
-    dispatch(playNext());
+    if (audioPlayerSlice.mode === "PLAYLIST") {
+      dispatch(playNext());
+    }
   };
 
   return (
@@ -75,41 +92,63 @@ const MyAudioPlayer = () => {
           style={{
             backgroundSize: "cover",
             backgroundPosition: "center",
-            backgroundImage: `url(${
-              audioPlayerSlice.currentPodcast?.thumbnail_url ?? ""
-            })`,
+            backgroundImage:
+              audioPlayerSlice.mode === "PLAYLIST"
+                ? `url(${
+                    audioPlayerSlice.playList?.currentPodcast?.thumbnail_url ??
+                    ""
+                  })`
+                : `url(${
+                    audioPlayerSlice.single?.podcast.thumbnail_url ?? ""
+                  })`,
           }}
         />
         <div className="flex flex-col flex-1">
           <div className="text-[rgba(255,255,255,0.95)] text-[14px] font-medium">
-            {audioPlayerSlice.currentPodcast?.episodes.find(
-              (ele) => ele.episode_no === audioPlayerSlice.currentEpisodeNo
-            )?.episode_name ?? ""}
+            {audioPlayerSlice.mode === "PLAYLIST"
+              ? audioPlayerSlice.playList?.currentPodcast?.episodes.find(
+                  (ele) =>
+                    ele.episode_no ===
+                    audioPlayerSlice.playList?.currentEpisodeNo
+                )?.episode_name ?? ""
+              : audioPlayerSlice.single?.episode_name ?? ""}
           </div>
           <div
             onClick={() =>
               pushRouteWithHistory(
-                `/home/podcasts/${audioPlayerSlice.currentPodcast?.uuid}`
+                audioPlayerSlice.mode === "PLAYLIST"
+                  ? `/home/podcasts/${audioPlayerSlice.playList?.currentPodcast?.uuid}`
+                  : `/home/podcasts/${audioPlayerSlice.single?.podcast.uuid}`
               )
             }
             className="text-[rgba(255,255,255,0.65)] text-[13px] font-medium cursor-pointer hover:underline"
           >
-            {audioPlayerSlice.currentPodcast?.podcast_name ?? ""}
+            {audioPlayerSlice.mode === "PLAYLIST"
+              ? audioPlayerSlice.playList?.currentPodcast?.podcast_name ?? ""
+              : audioPlayerSlice.single?.podcast.podcast_name ?? ""}
           </div>
         </div>
       </div>
       <CustomAudioPlayer
+        showSkipControls
+        showJumpControls={false}
         onPause={handleOnPause}
         onPlaying={handleOnPlaying}
         onEnded={handleOnEnded}
+        onClickPrevious={() => dispatch(playPrev())}
+        onClickNext={() => dispatch(playNext())}
         autoPlay={false}
         ref={audioPlayerRef}
         src={
-          audioPlayerSlice.currentPodcast
-            ? audioPlayerSlice.currentPodcast.episodes.find(
-                (ele) => ele.episode_no === audioPlayerSlice.currentEpisodeNo
-              )?.source_url
-            : ""
+          audioPlayerSlice.mode === "PLAYLIST"
+            ? audioPlayerSlice.playList?.currentPodcast
+              ? audioPlayerSlice.playList?.currentPodcast.episodes.find(
+                  (ele) =>
+                    ele.episode_no ===
+                    audioPlayerSlice.playList?.currentEpisodeNo
+                )?.source_url
+              : ""
+            : audioPlayerSlice.single?.source_url ?? ""
         }
         onPlay={(e) => console.log("onPlay")}
         style={{

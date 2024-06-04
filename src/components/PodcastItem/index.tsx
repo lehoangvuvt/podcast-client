@@ -14,6 +14,7 @@ const PodcastItem: React.FC<Props> = ({ podcast, width = "20%" }) => {
   const { pushRouteWithHistory } = useCustomRouter();
   return (
     <div
+      onClick={() => pushRouteWithHistory(`/home/podcasts/${podcast.uuid}`)}
       style={{
         width: width,
         display: "flex",
@@ -28,7 +29,6 @@ const PodcastItem: React.FC<Props> = ({ podcast, width = "20%" }) => {
       )}
     >
       <div
-        onClick={() => pushRouteWithHistory(`/home/podcasts/${podcast.uuid}`)}
         className={twMerge("aspect-square", "font-bold", "text-[20px]")}
         style={{
           width: "100%",
