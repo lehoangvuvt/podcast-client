@@ -155,8 +155,8 @@ const AudioPlayButton: React.FC<Props> = ({
       onClick={handleClick}
       className={twMerge(
         "rounded-full",
-        "w-[40px]",
-        "h-[40px]",
+        "w-[45px]",
+        "h-[45px]",
         "bg-[white]",
         "flex",
         "items-center",
@@ -169,8 +169,8 @@ const AudioPlayButton: React.FC<Props> = ({
           <Lottie
             style={{ position: "absolute" }}
             options={lottieOptions}
-            height={20}
-            width={40}
+            height={27}
+            width={55}
             isStopped={false}
             isPaused={false}
           />

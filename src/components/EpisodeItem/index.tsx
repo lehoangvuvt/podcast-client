@@ -5,6 +5,7 @@ import React from "react";
 import { twMerge } from "tailwind-merge";
 import useCustomRouter from "@/hooks/useCustomRouter";
 import AudioPlayButton from "../AudioPlayButton";
+import moment from "moment";
 
 type Props = {
   podcastDetails: PodcastDetails;
@@ -26,7 +27,7 @@ const EpisodeItem: React.FC<Props> = ({ episode, podcastDetails }) => {
         "py-[20px] px-[30px]",
         "cursor-pointer",
         "transition-all",
-        "hover:bg-[rgba(255,255,255,0.07)]"
+        "hover:bg-[rgba(255,255,255,0.1)]"
       )}
     >
       <div
@@ -62,6 +63,9 @@ const EpisodeItem: React.FC<Props> = ({ episode, podcastDetails }) => {
             )}
           >
             {episode.episode_desc}
+          </div>
+          <div className="text-[rgba(255,255,255,0.9)] text-[13px] font-semibold pt-[10px]">
+            {moment(episode.created_at).format("DD/MM/YYYY")}
           </div>
         </div>
       </div>

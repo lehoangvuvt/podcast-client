@@ -86,9 +86,9 @@ const MyAudioPlayer = () => {
 
   return (
     <div className="w-full h-full flex flex-row items-center">
-      <div className="w-[22%] h-full flex flex-row gap-[20px] items-center p-[20px]">
+      <div className="w-[25%] h-full flex flex-row gap-[20px] items-center p-[20px]">
         <div
-          className="w-[55px] h-[55px]"
+          className="w-[22%] aspect-square"
           style={{
             backgroundSize: "cover",
             backgroundPosition: "center",
@@ -103,8 +103,29 @@ const MyAudioPlayer = () => {
                   })`,
           }}
         />
-        <div className="flex flex-col flex-1">
-          <div className="text-[rgba(255,255,255,0.95)] text-[14px] font-medium">
+        <div className="flex flex-col w-[78%]">
+          <div
+            onClick={() =>
+              pushRouteWithHistory(
+                `/home/episodes/${
+                  audioPlayerSlice.mode === "SINGLE"
+                    ? audioPlayerSlice.single?.uuid ?? ""
+                    : audioPlayerSlice.playList?.currentPodcast.episodes.find(
+                        (ele) =>
+                          ele.episode_no ===
+                          audioPlayerSlice.playList?.currentEpisodeNo
+                      )?.uuid ?? ""
+                }`
+              )
+            }
+            style={{
+              whiteSpace: "nowrap",
+              textOverflow: "ellipsis",
+              width: "100%",
+              overflow: "hidden",
+            }}
+            className="text-[rgba(255,255,255,0.95)] text-[14px] font-medium  cursor-pointer hover:underline"
+          >
             {audioPlayerSlice.mode === "PLAYLIST"
               ? audioPlayerSlice.playList?.currentPodcast?.episodes.find(
                   (ele) =>
@@ -157,7 +178,7 @@ const MyAudioPlayer = () => {
           width: "56%",
         }}
       />
-      <div className="w-[22%]"></div>
+      <div className="w-[25%]"></div>
     </div>
   );
 };

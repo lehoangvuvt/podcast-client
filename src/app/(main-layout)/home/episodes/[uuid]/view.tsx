@@ -5,7 +5,9 @@ import AudioPlayButton from "@/components/AudioPlayButton";
 import EpisodeItem from "@/components/EpisodeItem";
 import { PodcastEpisodeDetails } from "@/types/apiResponse";
 import { FastAverageColor } from "fast-average-color";
+import moment from "moment";
 import { useEffect, useRef, useState } from "react";
+import { twMerge } from "tailwind-merge";
 
 type Props = {
   details: PodcastEpisodeDetails;
@@ -37,7 +39,7 @@ const EpisodeDetailsView: React.FC<Props> = ({ details }) => {
         zIndex: 99,
         position: "absolute",
       }}
-      className="w-full flex flex-col"
+      className="w-full flex flex-col pb-[100px]"
     >
       <div
         className="w-full h-[300px] flex flex-row items-center p-[30px] gap-[30px]"
@@ -63,8 +65,35 @@ const EpisodeDetailsView: React.FC<Props> = ({ details }) => {
           </div>
         </div>
       </div>
+      <div
+        className={twMerge(
+          "w-[80%]",
+          "px-[20px] pt-[20px]",
+          "text-[rgba(255,255,255,0.7)] text-[13px] font-medium"
+        )}
+      >
+        {moment(details.created_at).format("DD/MM/YYYY")}
+      </div>
       <div className="w-full pt-[20px] pl-[20px]">
         <AudioPlayButton episode={{ mode: "SINGLE", details }} />
+      </div>
+      <div
+        className={twMerge(
+          "w-full",
+          "p-[20px]",
+          "text-[white] text-[22px] font-bold"
+        )}
+      >
+        Description
+      </div>
+      <div
+        className={twMerge(
+          "w-[75%]",
+          "px-[20px]",
+          "text-[rgba(255,255,255,0.7)] text-[14px] font-medium"
+        )}
+      >
+        {details.episode_desc}
       </div>
     </div>
   );
