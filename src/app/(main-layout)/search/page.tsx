@@ -121,7 +121,7 @@ const SearchPage = () => {
                 {result.episodes.map((ep) => (
                   <div
                     key={ep.id}
-                    className="w-[99%] h-[200px] overflow-hidden"
+                    className="w-full"
                     style={{ textOverflow: "ellipsis" }}
                   >
                     <EpisodeItem episode={ep} podcast={ep.podcast} />

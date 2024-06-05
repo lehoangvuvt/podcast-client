@@ -151,7 +151,7 @@ const EpisodeDetailsView: React.FC<Props> = ({ details }) => {
           relativeEps &&
           relativeEps.length > 0 &&
           relativeEps.map((ep) => (
-            <div key={ep.id}>
+            <div key={ep.id} className="w-full">
               <EpisodeItem episode={ep} podcast={ep.podcast} />
             </div>
           ))}

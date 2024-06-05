@@ -50,10 +50,7 @@ const HomePage = () => {
               </div>
               <div className="w-full flex flex-col">
                 {result.episodes.map((ep) => (
-                  <div
-                    key={ep.id}
-                    className="w-[99%] h-[200px] overflow-hidden"
-                  >
+                  <div key={ep.id} className="w-[99%]  overflow-hidden">
                     <EpisodeItem episode={ep} podcast={ep.podcast} />
                   </div>
                 ))}

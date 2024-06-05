@@ -80,29 +80,37 @@ const EpisodeItem: React.FC<Props> = ({
               "pt-[5px]"
             )}
           >
-            {episode.episode_desc}
+            <div
+              style={{
+                width: "80%",
+                paddingTop: "10px",
+                paddingBottom: "20px",
+              }}
+            >
+              {episode.episode_desc}
+            </div>
           </div>
           <div className="text-[rgba(255,255,255,0.9)] text-[13px] font-semibold pt-[10px]">
             {moment(episode.created_at).format("DD/MM/YYYY")}
           </div>
         </div>
       </div>
-      <div
-        className={twMerge(
-          "w-full",
-          "h-[80px]",
-          "flex flex-row",
-          "items-center",
-          "justify-end"
-        )}
-      >
-        {podcastDetails && (
+      {podcastDetails && (
+        <div
+          className={twMerge(
+            "w-full",
+            "h-[80px]",
+            "flex flex-row",
+            "items-center",
+            "justify-end"
+          )}
+        >
           <AudioPlayButton
             episode={{ mode: "PLAYLIST", details: episode }}
             podcastDetails={podcastDetails}
           />
-        )}
-      </div>
+        </div>
+      )}
     </div>
   );
 };
