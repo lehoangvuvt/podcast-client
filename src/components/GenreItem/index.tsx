@@ -2,6 +2,8 @@
 
 import useCustomRouter from "@/hooks/useCustomRouter";
 import { Genre } from "@/types/apiResponse";
+import { useRouter } from "next/navigation";
+import { useEffect } from "react";
 import { twMerge } from "tailwind-merge";
 
 type Props = {
@@ -11,6 +13,12 @@ type Props = {
 
 const GenreItem: React.FC<Props> = ({ genre, width = "20%" }) => {
   const { pushRouteWithHistory } = useCustomRouter();
+
+  const router = useRouter();
+
+  useEffect(() => {
+    router.prefetch(`/home/genres/${genre.uuid}`);
+  }, [genre, router]);
 
   return (
     <div

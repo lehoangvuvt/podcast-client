@@ -1,11 +1,12 @@
 "use client";
 
 import { Podcast, PodcastDetails, PodcastEpisode } from "@/types/apiResponse";
-import React from "react";
+import React, { useEffect } from "react";
 import { twMerge } from "tailwind-merge";
 import useCustomRouter from "@/hooks/useCustomRouter";
 import AudioPlayButton from "../AudioPlayButton";
 import moment from "moment";
+import { useRouter } from "next/navigation";
 
 type Props = {
   podcastDetails?: PodcastDetails;
@@ -19,6 +20,12 @@ const EpisodeItem: React.FC<Props> = ({
   podcast = null,
 }) => {
   const { pushRouteWithHistory } = useCustomRouter();
+
+  const router = useRouter();
+
+  useEffect(() => {
+    router.prefetch(`/home/episodes/${episode.uuid}`);
+  }, [episode, router]);
 
   return (
     <div
