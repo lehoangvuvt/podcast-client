@@ -46,7 +46,7 @@ const HomePage = () => {
                   "px-[15px] pt-[0px] pb-[10px]"
                 )}
               >
-                Newest Episodes
+                New releases
               </div>
               <div className="w-full flex flex-col">
                 {result.episodes.map((ep) => (
@@ -69,7 +69,7 @@ const HomePage = () => {
                   "px-[15px] pt-[15px] pb-[15px]"
                 )}
               >
-                Newest Podcasts
+                Popular Podcasts
               </div>
               <div className="w-full flex flex-row flex-wrap gap-[10px] px-[20px]">
                 {result.podcasts.map((podcast) => (

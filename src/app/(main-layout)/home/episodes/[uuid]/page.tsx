@@ -4,11 +4,9 @@ import EpisodeDetailsView from "./view";
 const EpisodeDetailsPage = async ({ params }: { params: { uuid: string } }) => {
   const response = await EpisodesSevice.GetEpisodeDetails(params.uuid);
   if (response.status === "fail") return <h1>Not found...</h1>;
+  const episodeDetails = response.data.episode_details;
   return (
-    <EpisodeDetailsView
-      key={response.data.episode_details.id}
-      details={response.data.episode_details}
-    />
+    <EpisodeDetailsView key={episodeDetails.id} details={episodeDetails} />
   );
 };
 

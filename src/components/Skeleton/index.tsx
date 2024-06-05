@@ -8,16 +8,19 @@ export enum SHAPE_ENUMS {
   SQUARE,
   RECTANGLE,
   CIRCLE,
+  CUSTOM,
 }
 
 type Props = {
   width?: string;
   shape?: SHAPE_ENUMS;
+  customRatio?: number;
 };
 
 const MySkeleton: React.FC<Props> = ({
   width = "20%",
   shape = SHAPE_ENUMS.SQUARE,
+  customRatio = -1,
 }) => {
   let shapePropertiesMap: {
     [key in SHAPE_ENUMS]: {
@@ -35,6 +38,10 @@ const MySkeleton: React.FC<Props> = ({
     },
     [SHAPE_ENUMS.RECTANGLE]: {
       aspectRatio: 16 / 9,
+      borderRadius: 0,
+    },
+    [SHAPE_ENUMS.CUSTOM]: {
+      aspectRatio: customRatio,
       borderRadius: 0,
     },
   };

@@ -83,3 +83,7 @@ export type GetEpisodeDetailsSuccessResponse = {
 export type SearchItemsSuccessResponse = {
   result: SearchResult;
 };
+
+export type GetRelativeEpisodesSuccessResponse = {
+  episodes: PodcastEpisodeDetails[] | null;
+};

@@ -3,6 +3,8 @@
 
 import AudioPlayButton from "@/components/AudioPlayButton";
 import EpisodeItem from "@/components/EpisodeItem";
+import MySkeleton, { SHAPE_ENUMS } from "@/components/Skeleton";
+import RelativeService from "@/services/relative.service";
 import { PodcastEpisodeDetails } from "@/types/apiResponse";
 import { FastAverageColor } from "fast-average-color";
 import moment from "moment";
@@ -16,6 +18,10 @@ type Props = {
 const EpisodeDetailsView: React.FC<Props> = ({ details }) => {
   const thumbnailImgRef = useRef<HTMLImageElement>(null);
   const [dominantColor, setDominantColor] = useState("#111111");
+  const [isLoadingRelativeEps, setLoadingRelaviteEps] = useState(true);
+  const [relativeEps, setRelativeEps] = useState<
+    PodcastEpisodeDetails[] | null
+  >(null);
 
   useEffect(() => {
     if (!thumbnailImgRef || !thumbnailImgRef.current) return;
@@ -31,6 +37,24 @@ const EpisodeDetailsView: React.FC<Props> = ({ details }) => {
     };
     getColor();
   }, []);
+
+  useEffect(() => {
+    if (details) {
+      const getRelativeEpisodes = async () => {
+        const response = await RelativeService.GetRelativeEpisodes(
+          details.episode_no,
+          details.podcast.id
+        );
+        if (response.status === "success") {
+          setRelativeEps(response.data.episodes);
+        } else {
+          setRelativeEps(null);
+        }
+        setLoadingRelaviteEps(false);
+      };
+      getRelativeEpisodes();
+    }
+  }, [details]);
 
   return (
     <div
@@ -94,6 +118,40 @@ const EpisodeDetailsView: React.FC<Props> = ({ details }) => {
         )}
       >
         {details.episode_desc}
+      </div>
+
+      {isLoadingRelativeEps ||
+        (relativeEps && relativeEps?.length > 0 && (
+          <div
+            className={twMerge(
+              "w-full",
+              "px-[20px] pt-[40px] pb-[10px]",
+              "text-[white] text-[22px] font-bold"
+            )}
+          >
+            Relative Episodes
+          </div>
+        ))}
+      <div className="w-full flex flex-row flex-wrap gap-[0px] p-[15px]">
+        {isLoadingRelativeEps &&
+          Array(10)
+            .fill("")
+            .map((_, i) => (
+              <MySkeleton
+                shape={SHAPE_ENUMS.CUSTOM}
+                customRatio={5 / 1}
+                key={i}
+                width="100%"
+              />
+            ))}
+        {!isLoadingRelativeEps &&
+          relativeEps &&
+          relativeEps.length > 0 &&
+          relativeEps.map((ep) => (
+            <div key={ep.id}>
+              <EpisodeItem episode={ep} podcast={ep.podcast} />
+            </div>
+          ))}
       </div>
     </div>
   );

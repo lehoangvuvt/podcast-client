@@ -47,6 +47,16 @@ export default function Layout({
           className={twMerge("w-full h-[50px]", "flex-row gap-[10px] p-[15px]")}
         >
           <div
+            onClick={() => pushRouteWithHistory("/home")}
+            className={headerItemClass}
+            style={{
+              background: pathName === "/home" ? "white" : "#2e2e2e",
+              color: pathName === "/home" ? "#2e2e2e" : "white",
+            }}
+          >
+            Discover
+          </div>
+          <div
             onClick={() => pushRouteWithHistory("/home/genres")}
             className={headerItemClass}
             style={{
