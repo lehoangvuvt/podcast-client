@@ -132,7 +132,7 @@ const EpisodeDetailsView: React.FC<Props> = ({ details }) => {
             Relative Episodes
           </div>
         ))}
-      <div className="w-full flex flex-row flex-wrap gap-[0px] p-[15px]">
+      <div className="w-full flex flex-row flex-wrap p-[15px]">
         {isLoadingRelativeEps &&
           Array(10)
             .fill("")
@@ -142,6 +142,9 @@ const EpisodeDetailsView: React.FC<Props> = ({ details }) => {
                 customRatio={5 / 1}
                 key={i}
                 width="100%"
+                style={{
+                  marginTop: "15px",
+                }}
               />
             ))}
         {!isLoadingRelativeEps &&

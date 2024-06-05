@@ -3,6 +3,7 @@
 import { twMerge } from "tailwind-merge";
 import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
+import React from "react";
 
 export enum SHAPE_ENUMS {
   SQUARE,
@@ -15,12 +16,14 @@ type Props = {
   width?: string;
   shape?: SHAPE_ENUMS;
   customRatio?: number;
+  style?: React.CSSProperties;
 };
 
 const MySkeleton: React.FC<Props> = ({
   width = "20%",
   shape = SHAPE_ENUMS.SQUARE,
   customRatio = -1,
+  style,
 }) => {
   let shapePropertiesMap: {
     [key in SHAPE_ENUMS]: {
@@ -46,7 +49,7 @@ const MySkeleton: React.FC<Props> = ({
     },
   };
   return (
-    <div style={{ width: width }}>
+    <div style={{ width: width, ...style }}>
       <SkeletonTheme width={"100%"} baseColor="#202020" highlightColor="#444">
         <Skeleton
           style={{
