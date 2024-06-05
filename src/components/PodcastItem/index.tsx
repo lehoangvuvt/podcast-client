@@ -2,7 +2,8 @@
 
 import useCustomRouter from "@/hooks/useCustomRouter";
 import { Podcast } from "@/types/apiResponse";
-import moment from "moment";
+import { useRouter } from "next/navigation";
+import { useEffect } from "react";
 import { twMerge } from "tailwind-merge";
 
 type Props = {
@@ -12,6 +13,12 @@ type Props = {
 
 const PodcastItem: React.FC<Props> = ({ podcast, width = "20%" }) => {
   const { pushRouteWithHistory } = useCustomRouter();
+  const router = useRouter();
+
+  useEffect(() => {
+    router.prefetch(`/home/podcasts/${podcast.uuid}`);
+  }, [podcast, router]);
+
   return (
     <div
       onClick={() => pushRouteWithHistory(`/home/podcasts/${podcast.uuid}`)}
