@@ -1,4 +1,7 @@
-import { LoginSuccessResponse } from "@/types/apiResponse";
+import {
+  LoginSuccessResponse,
+  ModifyUserFavouriteSuccessResponse,
+} from "@/types/apiResponse";
 import baseAxios from "./axiosClient";
 
 const baseServiceURL = "/users";
@@ -67,6 +70,30 @@ const UsersService = {
       })) as {
         message: string;
       };
+      return { status: "success", data: response };
+    } catch (err: any) {
+      return { status: "fail", errorMsg: err.response.data.error };
+    }
+  },
+  async ModifyUserFavourite(data: {
+    type: "Episode" | "Podcast";
+    item_id: number;
+    operator: "Add" | "Remove";
+  }): Promise<
+    | {
+        status: "success";
+        data: ModifyUserFavouriteSuccessResponse;
+      }
+    | {
+        status: "fail";
+        errorMsg: string;
+      }
+  > {
+    try {
+      const url = `${baseServiceURL}/favourites`;
+      const response = (await baseAxios.post(url, data, {
+        withCredentials: true,
+      })) as ModifyUserFavouriteSuccessResponse;
       return { status: "success", data: response };
     } catch (err: any) {
       return { status: "fail", errorMsg: err.response.data.error };

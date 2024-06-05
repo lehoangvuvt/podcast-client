@@ -127,26 +127,38 @@ const MyAudioPlayer = () => {
             }}
             className="text-[rgba(255,255,255,0.95)] text-[14px] font-medium  cursor-pointer hover:underline"
           >
-            <Ticker
-              mode="chain"
-              key={
-                audioPlayerSlice.mode === "PLAYLIST"
-                  ? audioPlayerSlice.playList?.currentEpisodeNo
-                  : audioPlayerSlice.single?.uuid
-              }
-            >
-              {({ index }) => (
-                <>
-                  {audioPlayerSlice.mode === "PLAYLIST"
-                    ? audioPlayerSlice.playList?.currentPodcast?.episodes.find(
-                        (ele) =>
-                          ele.episode_no ===
-                          audioPlayerSlice.playList?.currentEpisodeNo
-                      )?.episode_name ?? ""
-                    : audioPlayerSlice.single?.episode_name ?? ""}
-                </>
-              )}
-            </Ticker>
+            {audioPlayerSlice.playerState !== "STOP" ? (
+              <>
+                <Ticker
+                  move={audioPlayerSlice.playerState === "PLAYING"}
+                  mode="chain"
+                  key={
+                    audioPlayerSlice.mode === "PLAYLIST"
+                      ? audioPlayerSlice.playList?.currentEpisodeNo
+                      : audioPlayerSlice.single?.uuid
+                  }
+                >
+                  {({ index }) => (
+                    <>
+                      {audioPlayerSlice.mode === "PLAYLIST"
+                        ? audioPlayerSlice.playList?.currentPodcast?.episodes.find(
+                            (ele) =>
+                              ele.episode_no ===
+                              audioPlayerSlice.playList?.currentEpisodeNo
+                          )?.episode_name ?? ""
+                        : audioPlayerSlice.single?.episode_name ?? ""}
+                    </>
+                  )}
+                </Ticker>
+              </>
+            ) : audioPlayerSlice.mode === "PLAYLIST" ? (
+              audioPlayerSlice.playList?.currentPodcast?.episodes.find(
+                (ele) =>
+                  ele.episode_no === audioPlayerSlice.playList?.currentEpisodeNo
+              )?.episode_name ?? ""
+            ) : (
+              audioPlayerSlice.single?.episode_name ?? ""
+            )}
           </div>
           <div
             onClick={() =>

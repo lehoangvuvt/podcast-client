@@ -88,3 +88,9 @@ export type SearchItemsSuccessResponse = {
 export type GetRelativeEpisodesSuccessResponse = {
   episodes: PodcastEpisodeDetails[] | null;
 };
+
+export type ModifyUserFavouriteSuccessResponse = {
+  type: "Episode" | "Podcast";
+  item_id: number;
+  operator: "Add" | "Remove";
+};

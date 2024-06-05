@@ -161,7 +161,9 @@ const AudioPlayButton: React.FC<Props> = ({
         "flex",
         "items-center",
         "justify-center",
-        "cursor-pointer"
+        "cursor-pointer",
+        "transition-all",
+        "hover:scale-110"
       )}
     >
       {isEpisodePlaying() ? (

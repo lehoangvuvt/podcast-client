@@ -104,7 +104,7 @@ const EpisodeDetailsView: React.FC<Props> = ({ details }) => {
         >
           {moment(details.created_at).format("DD/MM/YYYY")}
         </div>
-        <div className="w-full pt-[20px] pl-[20px] flex flex-row gap-[10px]">
+        <div className="w-full pt-[20px] pl-[20px] flex flex-row gap-[20px]">
           <AudioPlayButton episode={{ mode: "SINGLE", details }} />
           <AuthConditionalRenderWrapper required>
             <AddToFavButton type="episode" itemId={details.id} />
