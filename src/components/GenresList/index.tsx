@@ -22,7 +22,7 @@ const GenresList = () => {
   }, []);
 
   return (
-    <div className="w-full flex flex-row flex-wrap gap-[15px] p-[15px]">
+    <div className="w-full flex flex-row flex-wrap gap-[15px] px-[15px]">
       {isLoading &&
         Array(10)
           .fill("")

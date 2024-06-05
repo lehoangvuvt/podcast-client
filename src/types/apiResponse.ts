@@ -2,6 +2,7 @@ export type UserInfo = {
   id: number;
   username: number;
   email: number;
+  favourite_episodes: PodcastEpisode[] | null;
 };
 
 export type Genre = {

@@ -48,6 +48,30 @@ const UsersService = {
       return { status: "fail", errorMsg: err.response.data.error };
     }
   },
+  async Invalidate(): Promise<
+    | {
+        status: "success";
+        data: {
+          message: string;
+        };
+      }
+    | {
+        status: "fail";
+        errorMsg: string;
+      }
+  > {
+    try {
+      const url = `${baseServiceURL}/invalidate`;
+      const response = (await baseAxios.get(url, {
+        withCredentials: true,
+      })) as {
+        message: string;
+      };
+      return { status: "success", data: response };
+    } catch (err: any) {
+      return { status: "fail", errorMsg: err.response.data.error };
+    }
+  },
 };
 
 export default UsersService;

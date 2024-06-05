@@ -13,8 +13,8 @@ import { twMerge } from "tailwind-merge";
 const LoginPage = () => {
   const { pushRoute } = useCustomRouter();
   const [isLoading, setLoading] = useState(false);
-  const [username, setUsername] = useState<string>("");
-  const [password, setPassword] = useState<string>("");
+  const [username, setUsername] = useState<string>("lehoangvuvt");
+  const [password, setPassword] = useState<string>("12345");
   const [errorMsg, setErrorMsg] = useState<string | null>(null);
   const dispatch = useDispatch();
 
@@ -35,9 +35,14 @@ const LoginPage = () => {
   return (
     <form
       onSubmit={submitForm}
-      className="w-screen h-screen absolute top-0 left-0 flex-row"
+      style={{
+        background: "#232526",
+        backgroundImage: "linear-gradient(to bottom, #414345, #232526)",
+        minHeight: "100%",
+      }}
+      className="w-screen absolute top-0 left-0 flex flex-row flex-wrap  justify-center py-[30px]"
     >
-      <div className="w-[50%] h-[100%] bg-[#131418] flex flex-col items-center justify-center gap-[20px]">
+      <div className="w-[50%]  bg-[#131418] flex flex-col items-center justify-center gap-[20px] rounded-lg shadow-lg">
         <h1 className="w-[55%] text-[white] text-[40px] font-[600]">Log in</h1>
         <p className="w-[55%] text-[rgba(255,255,255,0.85)] font-[400] pb-[20px]">
           {`Don't have an account?`}{" "}
