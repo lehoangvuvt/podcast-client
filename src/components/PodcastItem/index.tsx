@@ -45,7 +45,7 @@ const PodcastItem: React.FC<Props> = ({ podcast, width = "20%" }) => {
         }}
       />
       <div className="w-full flex flex-col px-[5px] py-[10px]">
-        <div className="w-full text-[rgba(255,255,255,0.9)] font-semibold">
+        <div className="w-full text-[rgba(255,255,255,0.9)] text-[15px] font-semibold">
           {podcast.podcast_name}
         </div>
       </div>

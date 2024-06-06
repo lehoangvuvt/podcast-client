@@ -3,30 +3,17 @@
 import EpisodeItem from "@/components/EpisodeItem";
 import PodcastItem from "@/components/PodcastItem";
 import MySkeleton, { SHAPE_ENUMS } from "@/components/Skeleton";
+import useHomeFeeds from "@/react-query/hooks/useHomeFeeds";
 import HomeService from "@/services/home.service";
 import { SearchResult } from "@/types/apiResponse";
 import { useEffect, useState } from "react";
 import { twMerge } from "tailwind-merge";
 
 const HomePage = () => {
-  const [result, setResult] = useState<SearchResult | null>(null);
-  const [isLoading, setLoading] = useState(true);
-
-  useEffect(() => {
-    const getNewFeeds = async () => {
-      const response = await HomeService.GetHomeFeeds();
-      if (response.status === "success") {
-        setResult(response.data);
-      } else {
-        setResult(null);
-      }
-      setLoading(false);
-    };
-    getNewFeeds();
-  }, []);
+  const { result, isLoading } = useHomeFeeds();
 
   return (
-    <div className="w-full flex flex-wrap flex-col">
+    <div className="w-full flex flex-wrap flex-col pb-[50px]">
       {isLoading ? (
         <div className="w-full mt-[0px] text-[red] px-[15px] flex flex-row flex-wrap gap-[10px]">
           {Array(10)

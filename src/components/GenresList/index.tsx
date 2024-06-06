@@ -1,25 +1,11 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import { Genre } from "@/types/apiResponse";
-import GenresService from "@/services/genres.service";
 import GenreItem from "../GenreItem";
 import MySkeleton, { SHAPE_ENUMS } from "../Skeleton";
+import useGenres from "@/react-query/hooks/useGenres";
 
 const GenresList = () => {
-  const [genres, setGenres] = useState<Genre[]>([]);
-  const [isLoading, setLoading] = useState(true);
-
-  useEffect(() => {
-    const getAllGenres = async () => {
-      const response = await GenresService.GetAllGenres();
-      if (response.status === "success") {
-        setGenres(response.data.genres);
-      }
-      setLoading(false);
-    };
-    getAllGenres();
-  }, []);
+  const { genres, isLoading } = useGenres();
 
   return (
     <div className="w-full flex flex-row flex-wrap gap-[15px] px-[15px]">
@@ -30,7 +16,8 @@ const GenresList = () => {
             <MySkeleton shape={SHAPE_ENUMS.RECTANGLE} key={i} width="23%" />
           ))}
       {!isLoading &&
-        genres?.length > 0 &&
+        genres &&
+        genres.length > 0 &&
         genres.map((genre) => (
           <GenreItem width="23%" key={genre.id} genre={genre} />
         ))}
