@@ -48,10 +48,10 @@ const AddToFavButton: React.FC<Props> = ({ type, itemId }) => {
           operator: "Add",
         });
         if (response.status === "success") {
-          toast("Add episode to your favourite");
           const response = await UsersService.GetUserFavouriteItems();
           if (response.status === "success") {
             dispatch(setUserFavouriteItems(response.data));
+            toast("Add episode to your favourite");
           }
         }
         break;
@@ -67,10 +67,10 @@ const AddToFavButton: React.FC<Props> = ({ type, itemId }) => {
           operator: "Remove",
         });
         if (response.status === "success") {
-          toast("Remove episode from your favourite");
           const response = await UsersService.GetUserFavouriteItems();
           if (response.status === "success") {
             dispatch(setUserFavouriteItems(response.data));
+            toast("Remove episode from your favourite");
           }
         }
         break;
