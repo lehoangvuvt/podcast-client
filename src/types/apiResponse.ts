@@ -2,7 +2,6 @@ export type UserInfo = {
   id: number;
   username: number;
   email: number;
-  favourite_episodes: PodcastEpisode[] | null;
 };
 
 export type Genre = {
@@ -93,4 +92,9 @@ export type ModifyUserFavouriteSuccessResponse = {
   type: "Episode" | "Podcast";
   item_id: number;
   operator: "Add" | "Remove";
+};
+
+export type UserFavouriteItems = {
+  favourite_episodes: PodcastEpisode[] | null;
+  favourite_podcasts: Podcast[] | null;
 };

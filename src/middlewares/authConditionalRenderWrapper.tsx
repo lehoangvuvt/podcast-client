@@ -12,13 +12,13 @@ const AuthConditionalRenderWrapper: React.FC<Props> = ({
   children,
   required,
 }) => {
-  const user = useSelector((state: State) => state.user);
+  const userSlice = useSelector((state: State) => state.user);
 
   return required
-    ? user && user.userInfo
+    ? userSlice.userInfo
       ? children
       : null
-    : user && user.userInfo
+    : userSlice.userInfo
     ? null
     : children;
 };

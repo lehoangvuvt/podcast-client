@@ -1,23 +1,21 @@
 "use client";
 
-import useAuth from "@/hooks/useAuth";
 import useCustomRouter from "@/hooks/useCustomRouter";
+import { State } from "@/redux/store";
 import { useEffect } from "react";
+import { useSelector } from "react-redux";
 
 const noAuth = (WrappedComponent: React.FC) => {
   const NoAuth: React.FC = (props: any) => {
     const { pushRoute } = useCustomRouter();
-    const { user, isLoading } = useAuth();
+    const userSlice = useSelector((state: State) => state.user);
 
     useEffect(() => {
-      if (isLoading) return;
-      if (user?.userInfo) {
+      if (userSlice.userInfo) {
         pushRoute("/home");
       }
-    }, [user, pushRoute, isLoading]);
-
-    if (isLoading) return <h1>Loading...</h1>;
-    if (!isLoading && user?.userInfo) return null;
+    }, [userSlice, pushRoute]);
+    if (userSlice.userInfo) return null;
     return <WrappedComponent {...props} />;
   };
 

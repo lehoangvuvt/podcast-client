@@ -141,7 +141,7 @@ export default function Layout({
                       "text-[rgba(255,255,255,0.5)] font-medium text-[15px]"
                     )}
                   >
-                    {userSlice.userInfo?.favourite_episodes?.length ?? 0}{" "}
+                    {userSlice.favouriteItems?.favourite_episodes?.length ?? 0}{" "}
                     episodes
                   </div>
                 </div>

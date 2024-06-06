@@ -38,10 +38,10 @@ const FavouritesEpisodes = () => {
       </div>
       <div className="w-full flex flex-col px-[5px] py-[5px]">
         {userSlice &&
-          userSlice.userInfo &&
-          userSlice.userInfo.favourite_episodes &&
-          userSlice.userInfo.favourite_episodes.length > 0 &&
-          userSlice.userInfo.favourite_episodes.map((episode, i) => (
+          userSlice.favouriteItems &&
+          userSlice.favouriteItems.favourite_episodes &&
+          userSlice.favouriteItems.favourite_episodes.length > 0 &&
+          userSlice.favouriteItems.favourite_episodes.map((episode, i) => (
             <div
               onClick={() =>
                 pushRouteWithHistory(`/home/episodes/${episode.uuid}`)

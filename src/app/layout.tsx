@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import ReduxProvider from "@/redux/provider";
+import ReactQueryProvider from "@/react-query/provider";
+import AuthWrapper from "@/middlewares/authWrapper";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -18,7 +20,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <ReduxProvider>{children}</ReduxProvider>
+        <ReactQueryProvider>
+          <ReduxProvider>
+            <AuthWrapper>{children}</AuthWrapper>
+          </ReduxProvider>
+        </ReactQueryProvider>
       </body>
     </html>
   );

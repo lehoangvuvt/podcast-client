@@ -25,6 +25,7 @@ const LoginPage = () => {
     const response = await UsersService.Login(username, password);
     if (response.status === "success") {
       dispatch(setUserInfo(response.data));
+      pushRoute("/home");
     } else {
       dispatch(setUserInfo(null));
       setErrorMsg(response.errorMsg);

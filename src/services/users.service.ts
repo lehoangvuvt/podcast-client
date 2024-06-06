@@ -1,6 +1,7 @@
 import {
   LoginSuccessResponse,
   ModifyUserFavouriteSuccessResponse,
+  UserFavouriteItems,
 } from "@/types/apiResponse";
 import baseAxios from "./axiosClient";
 
@@ -94,6 +95,26 @@ const UsersService = {
       const response = (await baseAxios.post(url, data, {
         withCredentials: true,
       })) as ModifyUserFavouriteSuccessResponse;
+      return { status: "success", data: response };
+    } catch (err: any) {
+      return { status: "fail", errorMsg: err.response.data.error };
+    }
+  },
+  async GetUserFavouriteItems(): Promise<
+    | {
+        status: "success";
+        data: UserFavouriteItems;
+      }
+    | {
+        status: "fail";
+        errorMsg: string;
+      }
+  > {
+    try {
+      const url = `${baseServiceURL}/favourites`;
+      const response = (await baseAxios.get(url, {
+        withCredentials: true,
+      })) as UserFavouriteItems;
       return { status: "success", data: response };
     } catch (err: any) {
       return { status: "fail", errorMsg: err.response.data.error };

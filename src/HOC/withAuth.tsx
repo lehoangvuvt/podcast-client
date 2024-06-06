@@ -2,36 +2,19 @@
 
 import useCustomRouter from "@/hooks/useCustomRouter";
 import { State } from "@/redux/store";
-import UsersService from "@/services/users.service";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useSelector } from "react-redux";
 
 const withAuth = (WrappedComponent: React.FC) => {
   const WithAuth: React.FC = (props: any) => {
-    const [isLoading, setLoading] = useState(true);
-    const user = useSelector((state: State) => state.user);
+    const userSlice = useSelector((state: State) => state.user);
     const { pushRoute } = useCustomRouter();
 
     useEffect(() => {
-      return () => setLoading(false);
-    }, []);
+      if (userSlice.userInfo) return;
+      pushRoute("/home");
+    }, [userSlice, pushRoute]);
 
-    useEffect(() => {
-      if (user?.userInfo) {
-        setLoading(false);
-      } else {
-        const authenticate = async () => {
-          const response = await UsersService.Authenticate();
-          if (response.status === "fail") {
-            pushRoute("/home");
-          }
-          setLoading(false);
-        };
-        authenticate();
-      }
-    }, [user, pushRoute]);
-
-    if (isLoading) return <h1>Loading...</h1>;
     return <WrappedComponent {...props} />;
   };
 

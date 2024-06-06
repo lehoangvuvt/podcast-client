@@ -8,7 +8,9 @@ import { twMerge } from "tailwind-merge";
 import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import UsersService from "@/services/users.service";
-import { setUserInfo } from "@/redux/slices/userSlice";
+import { QueryClient, useQueryClient } from "react-query";
+import { QUERY_KEYS } from "@/react-query/consts";
+import { setUserFavouriteItems } from "@/redux/slices/userSlice";
 
 type Props = {
   type: "episode" | "podcast";
@@ -16,16 +18,16 @@ type Props = {
 };
 
 const AddToFavButton: React.FC<Props> = ({ type, itemId }) => {
-  const [isLoading, setLoading] = useState(true);
   const userSlice = useSelector((state: State) => state.user);
   const [isAdded, setAdded] = useState(false);
   const dispatch = useDispatch();
+  const queryClient = useQueryClient();
 
   useEffect(() => {
     let isAdded = false;
     switch (type) {
       case "episode":
-        isAdded = userSlice.userInfo?.favourite_episodes?.find(
+        isAdded = userSlice.favouriteItems?.favourite_episodes?.find(
           (ele) => ele.id === itemId
         )
           ? true
@@ -36,7 +38,6 @@ const AddToFavButton: React.FC<Props> = ({ type, itemId }) => {
   }, [userSlice, type, itemId]);
 
   const handleAddToFav = async () => {
-    setLoading(true);
     switch (type) {
       case "episode":
         const response = await UsersService.ModifyUserFavourite({
@@ -45,18 +46,14 @@ const AddToFavButton: React.FC<Props> = ({ type, itemId }) => {
           operator: "Add",
         });
         if (response.status === "success") {
-          const authenticateRes = await UsersService.Authenticate();
-          if (authenticateRes.status === "success") {
-            dispatch(setUserInfo(authenticateRes.data));
-          }
+          dispatch(setUserFavouriteItems(null));
+          queryClient.invalidateQueries([QUERY_KEYS.FAVOURITE_ITEMS]);
         }
         break;
     }
-    setLoading(false);
   };
 
   const handleRemoveFromFav = async () => {
-    setLoading(true);
     switch (type) {
       case "episode":
         const response = await UsersService.ModifyUserFavourite({
@@ -65,14 +62,11 @@ const AddToFavButton: React.FC<Props> = ({ type, itemId }) => {
           operator: "Remove",
         });
         if (response.status === "success") {
-          const authenticateRes = await UsersService.Authenticate();
-          if (authenticateRes.status === "success") {
-            dispatch(setUserInfo(authenticateRes.data));
-          }
+          dispatch(setUserFavouriteItems(null));
+          queryClient.invalidateQueries([QUERY_KEYS.FAVOURITE_ITEMS]);
         }
         break;
     }
-    setLoading(false);
   };
 
   return (

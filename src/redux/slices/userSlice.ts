@@ -1,13 +1,20 @@
-import { UserInfo } from "@/types/apiResponse";
+import {
+  Podcast,
+  PodcastEpisode,
+  UserFavouriteItems,
+  UserInfo,
+} from "@/types/apiResponse";
 import { createSlice } from "@reduxjs/toolkit";
 import { SLICE_NAMES } from "../consts";
 
 type State = {
   userInfo: UserInfo | null;
+  favouriteItems: UserFavouriteItems | null;
 };
 
 const initialState: State = {
   userInfo: null,
+  favouriteItems: null,
 };
 
 const userSlice = createSlice({
@@ -17,8 +24,16 @@ const userSlice = createSlice({
     setUserInfo(state, action) {
       state.userInfo = action.payload;
     },
+    setUserFavouriteItems(
+      state,
+      action: {
+        payload: UserFavouriteItems | null;
+      }
+    ) {
+      state.favouriteItems = action.payload;
+    },
   },
 });
 
-export const { setUserInfo } = userSlice.actions;
+export const { setUserInfo, setUserFavouriteItems } = userSlice.actions;
 export default userSlice.reducer;

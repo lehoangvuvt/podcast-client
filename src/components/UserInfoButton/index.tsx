@@ -1,6 +1,5 @@
 "use client";
 
-import useAuth from "@/hooks/useAuth";
 import useCustomRouter from "@/hooks/useCustomRouter";
 import { twMerge } from "tailwind-merge";
 import { Popover } from "react-tiny-popover";
@@ -9,7 +8,6 @@ import UsersService from "@/services/users.service";
 import AuthConditionalRenderWrapper from "@/middlewares/authConditionalRenderWrapper";
 
 const UserInfoButton = () => {
-  const { user, isLoading } = useAuth();
   const { pushRouteWithHistory } = useCustomRouter();
   const [isOpenPopover, setOpenPopover] = useState(false);
 
@@ -17,8 +15,6 @@ const UserInfoButton = () => {
     await UsersService.Invalidate();
     window.location.reload();
   };
-
-  if (isLoading) return null;
 
   return (
     <div>
