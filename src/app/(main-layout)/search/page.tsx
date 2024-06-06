@@ -3,18 +3,16 @@
 import EpisodeItem from "@/components/EpisodeItem";
 import PodcastItem from "@/components/PodcastItem";
 import MySkeleton, { SHAPE_ENUMS } from "@/components/Skeleton";
-import SearchService from "@/services/search.service";
-import { SearchResult } from "@/types/apiResponse";
+import useSearchItems from "@/react-query/hooks/useSearchItems";
 import { useSearchParams } from "next/navigation";
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { twMerge } from "tailwind-merge";
 
 const SearchPage = () => {
   const searchParams = useSearchParams();
   const dbTimeout = useRef<any>(null);
   const [q, setQ] = useState(searchParams.get("q") ?? "");
-  const [result, setResult] = useState<SearchResult | null>(null);
-  const [isLoading, setLoading] = useState(false);
+  const { result, isLoading } = useSearchItems(q);
 
   useEffect(() => {
     if (dbTimeout && dbTimeout.current) {
@@ -29,26 +27,6 @@ const SearchPage = () => {
       window.history.replaceState({}, "", `/search?q=${q}`);
     }, 300);
   }, [q]);
-
-  const search = useCallback(async (value: string) => {
-    setLoading(true);
-    const response = await SearchService.SearchItems(value);
-    if (response.status === "success") {
-      setResult(response.data.result);
-    } else {
-      setResult(null);
-    }
-    setLoading(false);
-  }, []);
-
-  useEffect(() => {
-    const qParam = searchParams.get("q");
-    if (!qParam || qParam.trim().length === 0) {
-      setResult(null);
-      return;
-    }
-    search(qParam);
-  }, [searchParams, search]);
 
   return (
     <div className="w-full flex flex-wrap flex-col">
