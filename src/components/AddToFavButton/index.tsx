@@ -9,8 +9,10 @@ import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import UsersService from "@/services/users.service";
 import { useQueryClient } from "react-query";
-import { QUERY_KEYS } from "@/react-query/consts";
-import { setMutateFavItems } from "@/redux/slices/userSlice";
+import { ToastContainer, toast, Flip } from "react-toastify";
+
+import "react-toastify/dist/ReactToastify.css";
+import { setUserFavouriteItems } from "@/redux/slices/userSlice";
 
 type Props = {
   type: "episode" | "podcast";
@@ -46,8 +48,11 @@ const AddToFavButton: React.FC<Props> = ({ type, itemId }) => {
           operator: "Add",
         });
         if (response.status === "success") {
-          dispatch(setMutateFavItems(true));
-          queryClient.invalidateQueries([QUERY_KEYS.FAVOURITE_ITEMS]);
+          toast("Add episode to your favourite");
+          const response = await UsersService.GetUserFavouriteItems();
+          if (response.status === "success") {
+            dispatch(setUserFavouriteItems(response.data));
+          }
         }
         break;
     }
@@ -62,8 +67,11 @@ const AddToFavButton: React.FC<Props> = ({ type, itemId }) => {
           operator: "Remove",
         });
         if (response.status === "success") {
-          dispatch(setMutateFavItems(true));
-          queryClient.invalidateQueries([QUERY_KEYS.FAVOURITE_ITEMS]);
+          toast("Remove episode from your favourite");
+          const response = await UsersService.GetUserFavouriteItems();
+          if (response.status === "success") {
+            dispatch(setUserFavouriteItems(response.data));
+          }
         }
         break;
     }
@@ -101,6 +109,18 @@ const AddToFavButton: React.FC<Props> = ({ type, itemId }) => {
           />
         )}
       </button>
+      <ToastContainer
+        hideProgressBar
+        autoClose={500}
+        transition={Flip}
+        theme="colored"
+        style={{
+          position: "fixed",
+          zIndex: 1000,
+          top: "50%",
+          left: "calc(50% - 80px)",
+        }}
+      />
     </AuthConditionalRenderWrapper>
   );
 };

@@ -10,13 +10,11 @@ import { SLICE_NAMES } from "../consts";
 type State = {
   userInfo: UserInfo | null;
   favouriteItems: UserFavouriteItems | null;
-  isMutateFavItems: boolean;
 };
 
 const initialState: State = {
   userInfo: null,
   favouriteItems: null,
-  isMutateFavItems: false,
 };
 
 const userSlice = createSlice({
@@ -33,14 +31,9 @@ const userSlice = createSlice({
       }
     ) {
       state.favouriteItems = action.payload;
-      state.isMutateFavItems = false;
-    },
-    setMutateFavItems(state, action) {
-      state.isMutateFavItems = action.payload;
     },
   },
 });
 
-export const { setUserInfo, setUserFavouriteItems, setMutateFavItems } =
-  userSlice.actions;
+export const { setUserInfo, setUserFavouriteItems } = userSlice.actions;
 export default userSlice.reducer;

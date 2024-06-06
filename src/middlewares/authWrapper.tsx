@@ -15,12 +15,8 @@ const AuthWrapper: React.FC<Props> = ({ children }) => {
   const dispatch = useDispatch();
   const userSlice = useSelector((state: State) => state.user);
   const { userInfo, isLoading } = useAuthenticate();
-  const {
-    items,
-    isError,
-    isLoading: isLoadingFavItems,
-  } = useFavouriteItems(
-    userSlice.userInfo === null || userSlice.isMutateFavItems
+  const { items, isLoading: isLoadingFavItems } = useFavouriteItems(
+    userSlice.userInfo === null
   );
 
   useEffect(() => {

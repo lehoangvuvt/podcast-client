@@ -59,7 +59,7 @@ const SearchPage = () => {
             "linear-gradient(to left, #121212, rgba(255,255,255,0.05))",
           boxSizing: "border-box",
         }}
-        className="fixed w-[75%] top-[60px] h-[80px] pl-[20px] flex items-center"
+        className="fixed w-[70%] top-[60px] h-[80px] pl-[20px] flex items-center"
       >
         <input
           className={twMerge(
