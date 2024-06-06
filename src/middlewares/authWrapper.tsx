@@ -20,7 +20,7 @@ const AuthWrapper: React.FC<Props> = ({ children }) => {
     isError,
     isLoading: isLoadingFavItems,
   } = useFavouriteItems(
-    userSlice.userInfo === null || userSlice.favouriteItems === null
+    userSlice.userInfo === null || userSlice.isMutateFavItems
   );
 
   useEffect(() => {

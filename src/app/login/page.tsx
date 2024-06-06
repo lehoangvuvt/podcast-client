@@ -3,7 +3,7 @@
 import noAuth from "@/HOC/noAuth";
 import ResponseMessage from "@/components/ResponseMessage";
 import useCustomRouter from "@/hooks/useCustomRouter";
-import { setUserInfo } from "@/redux/slices/userSlice";
+import { setUserFavouriteItems, setUserInfo } from "@/redux/slices/userSlice";
 import UsersService from "@/services/users.service";
 import React, { FormEvent, useState } from "react";
 import { useDispatch } from "react-redux";
@@ -25,6 +25,10 @@ const LoginPage = () => {
     const response = await UsersService.Login(username, password);
     if (response.status === "success") {
       dispatch(setUserInfo(response.data));
+      const getFavItemsRes = await UsersService.GetUserFavouriteItems();
+      if (getFavItemsRes.status === "success") {
+        dispatch(setUserFavouriteItems(getFavItemsRes.data));
+      }
       pushRoute("/home");
     } else {
       dispatch(setUserInfo(null));

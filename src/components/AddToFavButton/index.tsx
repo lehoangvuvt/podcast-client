@@ -8,9 +8,9 @@ import { twMerge } from "tailwind-merge";
 import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import UsersService from "@/services/users.service";
-import { QueryClient, useQueryClient } from "react-query";
+import { useQueryClient } from "react-query";
 import { QUERY_KEYS } from "@/react-query/consts";
-import { setUserFavouriteItems } from "@/redux/slices/userSlice";
+import { setMutateFavItems } from "@/redux/slices/userSlice";
 
 type Props = {
   type: "episode" | "podcast";
@@ -46,7 +46,7 @@ const AddToFavButton: React.FC<Props> = ({ type, itemId }) => {
           operator: "Add",
         });
         if (response.status === "success") {
-          dispatch(setUserFavouriteItems(null));
+          dispatch(setMutateFavItems(true));
           queryClient.invalidateQueries([QUERY_KEYS.FAVOURITE_ITEMS]);
         }
         break;
@@ -62,7 +62,7 @@ const AddToFavButton: React.FC<Props> = ({ type, itemId }) => {
           operator: "Remove",
         });
         if (response.status === "success") {
-          dispatch(setUserFavouriteItems(null));
+          dispatch(setMutateFavItems(true));
           queryClient.invalidateQueries([QUERY_KEYS.FAVOURITE_ITEMS]);
         }
         break;
