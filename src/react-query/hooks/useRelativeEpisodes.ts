@@ -25,7 +25,7 @@ const useRelativeEpisodes = (episodeNo: number, podcastId: number) => {
   const { data, isError, isLoading } = useQuery(
     [QUERY_KEYS.RELATIVE_EPISODES, episodeNo, podcastId],
     getRelativeEpisodes,
-    { enabled: !!episodeNo && !!podcastId }
+    { enabled: !!episodeNo && !!podcastId, staleTime: 30 * 60 * 1000 }
   );
 
   return {
