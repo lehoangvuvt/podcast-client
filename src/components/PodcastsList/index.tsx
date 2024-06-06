@@ -14,12 +14,16 @@ const PodcastsList: React.FC<Props> = ({ externalData = null }) => {
 
   return (
     <div className="w-full flex flex-row flex-wrap gap-[15px] px-[15px]">
-      {isLoading &&
-        Array(10)
-          .fill("")
-          .map((_, i) => (
-            <MySkeleton shape={SHAPE_ENUMS.SQUARE} key={i} width="20%" />
-          ))}
+      {externalData
+        ? externalData.map((podcast) => (
+            <PodcastItem width={"20%"} key={podcast.id} podcast={podcast} />
+          ))
+        : isLoading &&
+          Array(10)
+            .fill("")
+            .map((_, i) => (
+              <MySkeleton shape={SHAPE_ENUMS.SQUARE} key={i} width="20%" />
+            ))}
       {!isLoading &&
         podcasts &&
         podcasts.length > 0 &&
