@@ -61,9 +61,9 @@ const FavouritesEpisodes = () => {
               onClick={() =>
                 pushRouteWithHistory(`/home/episodes/${episode.uuid}`)
               }
-              className="w-full flex flex-row py-[20px] px-[30px] 
-              cursor-pointer items-center font-semibold text-[16px] 
-              hover:bg-[rgba(255,255,255,0.08)]
+              className="w-full flex flex-row py-[18px] px-[30px] 
+              cursor-pointer items-center font-medium text-[14px] 
+              hover:bg-[rgba(255,255,255,0.1)]
               rounded-sm
               "
               key={episode.id}
