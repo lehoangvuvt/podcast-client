@@ -6,8 +6,8 @@ import AudioPlayButton from "@/components/AudioPlayButton";
 import EpisodeItem from "@/components/EpisodeItem";
 import MySkeleton, { SHAPE_ENUMS } from "@/components/Skeleton";
 import AuthConditionalRenderWrapper from "@/middlewares/authConditionalRenderWrapper";
+import useRelativeEpisodes from "@/react-query/hooks/useRelativeEpisodes";
 import { State } from "@/redux/store";
-import RelativeService from "@/services/relative.service";
 import { PodcastEpisodeDetails } from "@/types/apiResponse";
 import { FastAverageColor } from "fast-average-color";
 import moment from "moment";
@@ -22,11 +22,9 @@ type Props = {
 const EpisodeDetailsView: React.FC<Props> = ({ details }) => {
   const thumbnailImgRef = useRef<HTMLImageElement>(null);
   const [dominantColor, setDominantColor] = useState("#111111");
-  const [isLoadingRelativeEps, setLoadingRelaviteEps] = useState(true);
   const userSlice = useSelector((state: State) => state.user);
-  const [relativeEps, setRelativeEps] = useState<
-    PodcastEpisodeDetails[] | null
-  >(null);
+  const { episodes: relativeEps, isLoading: isLoadingRelativeEps } =
+    useRelativeEpisodes(details.episode_no, details.podcast_id);
 
   useEffect(() => {
     if (!thumbnailImgRef || !thumbnailImgRef.current) return;
@@ -42,24 +40,6 @@ const EpisodeDetailsView: React.FC<Props> = ({ details }) => {
     };
     getColor();
   }, []);
-
-  useEffect(() => {
-    if (details) {
-      const getRelativeEpisodes = async () => {
-        const response = await RelativeService.GetRelativeEpisodes(
-          details.episode_no,
-          details.podcast.id
-        );
-        if (response.status === "success") {
-          setRelativeEps(response.data.episodes);
-        } else {
-          setRelativeEps(null);
-        }
-        setLoadingRelaviteEps(false);
-      };
-      getRelativeEpisodes();
-    }
-  }, [details]);
 
   return (
     <div

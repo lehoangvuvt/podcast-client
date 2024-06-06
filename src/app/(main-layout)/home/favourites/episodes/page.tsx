@@ -4,6 +4,8 @@ import withAuth from "@/HOC/withAuth";
 import EpisodeItem from "@/components/EpisodeItem";
 import useCustomRouter from "@/hooks/useCustomRouter";
 import { State } from "@/redux/store";
+import { useRouter } from "next/navigation";
+import { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { twMerge } from "tailwind-merge";
 
@@ -11,6 +13,19 @@ const FavouritesEpisodes = () => {
   const userSlice = useSelector((state: State) => state.user);
   const headerColor = "#FF80AB";
   const { pushRouteWithHistory } = useCustomRouter();
+  const router = useRouter();
+
+  useEffect(() => {
+    if (
+      userSlice.favouriteItems &&
+      userSlice.favouriteItems.favourite_episodes &&
+      userSlice.favouriteItems.favourite_episodes.length > 0
+    ) {
+      userSlice.favouriteItems.favourite_episodes.forEach((ep) => {
+        router.prefetch(`/home/episodes/${ep.uuid}`);
+      });
+    }
+  }, [userSlice, router]);
 
   return (
     <div
