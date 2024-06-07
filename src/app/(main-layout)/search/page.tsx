@@ -1,7 +1,5 @@
 "use client";
 
-export const dynamic = "force-dynamic";
-
 import EpisodeItem from "@/components/EpisodeItem";
 import PodcastItem from "@/components/PodcastItem";
 import MySkeleton, { SHAPE_ENUMS } from "@/components/Skeleton";

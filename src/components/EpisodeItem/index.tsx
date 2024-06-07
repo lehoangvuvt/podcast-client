@@ -55,7 +55,7 @@ const EpisodeItem: React.FC<Props> = ({
                 ? podcast.thumbnail_url
                 : ""
             }
-            alt={episode.episode_name.replaceAll(" ", "_") + "_thumbnail"}
+            alt={episode.uuid + "_thumbnail"}
             layout="fill"
             objectFit="cover"
             objectPosition="center"

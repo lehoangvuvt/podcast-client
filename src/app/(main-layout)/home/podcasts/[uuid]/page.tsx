@@ -1,4 +1,3 @@
-import EpisodeItem from "@/components/EpisodeItem";
 import PodcastsService from "@/services/podcasts.service";
 import PodcastDetailsView from "./view";
 

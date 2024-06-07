@@ -1,6 +1,5 @@
 "use client";
 
-import MyAudioPlayer from "@/components/AudioPlayer";
 import useCustomRouter from "@/hooks/useCustomRouter";
 import { usePathname } from "next/navigation";
 import { twMerge } from "tailwind-merge";

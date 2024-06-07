@@ -1,5 +1,5 @@
 import UsersService from "@/services/users.service";
-import { UserFavouriteItems, UserInfo } from "@/types/apiResponse";
+import { UserFavouriteItems } from "@/types/apiResponse";
 import { useQuery } from "react-query";
 import { QUERY_KEYS } from "../consts";
 

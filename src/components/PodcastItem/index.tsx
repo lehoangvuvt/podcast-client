@@ -47,7 +47,7 @@ const PodcastItem: React.FC<Props> = ({ podcast, width = "20%" }) => {
       >
         <Image
           src={podcast.thumbnail_url}
-          alt={podcast.podcast_name.replaceAll(" ", "_") + "_thumbnail"}
+          alt={podcast.uuid + "_thumbnail"}
           layout="fill"
           objectFit="cover"
           objectPosition="center"

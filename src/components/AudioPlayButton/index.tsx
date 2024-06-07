@@ -8,7 +8,6 @@ import {
 } from "@/redux/slices/audioPlayerSlice";
 import { State } from "@/redux/store";
 import {
-  Podcast,
   PodcastDetails,
   PodcastEpisode,
   PodcastEpisodeDetails,

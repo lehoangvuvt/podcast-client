@@ -1,9 +1,4 @@
-import {
-  Podcast,
-  PodcastEpisode,
-  UserFavouriteItems,
-  UserInfo,
-} from "@/types/apiResponse";
+import { UserFavouriteItems, UserInfo } from "@/types/apiResponse";
 import { createSlice } from "@reduxjs/toolkit";
 import { SLICE_NAMES } from "../consts";
 

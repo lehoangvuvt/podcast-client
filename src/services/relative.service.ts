@@ -1,7 +1,4 @@
-import {
-  GetRelativeEpisodesSuccessResponse,
-  SearchResult,
-} from "@/types/apiResponse";
+import { GetRelativeEpisodesSuccessResponse } from "@/types/apiResponse";
 import baseAxios from "./axiosClient";
 
 const baseServiceURL = "/relative";

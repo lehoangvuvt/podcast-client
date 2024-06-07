@@ -1,8 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
 "use client";
 
-import EpisodeItem from "@/components/EpisodeItem";
-import PodcastItem from "@/components/PodcastItem";
 import PodcastsList from "@/components/PodcastsList";
 import { GenreDetails } from "@/types/apiResponse";
 import { FastAverageColor } from "fast-average-color";

@@ -1,4 +1,4 @@
-import { PodcastEpisodeDetails, SearchResult } from "@/types/apiResponse";
+import { SearchResult } from "@/types/apiResponse";
 import { useQuery } from "react-query";
 import { QUERY_KEYS } from "../consts";
 import HomeService from "@/services/home.service";

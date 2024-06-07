@@ -1,7 +1,6 @@
 "use client";
 
 import withAuth from "@/HOC/withAuth";
-import EpisodeItem from "@/components/EpisodeItem";
 import useCustomRouter from "@/hooks/useCustomRouter";
 import { State } from "@/redux/store";
 import { useRouter } from "next/navigation";
