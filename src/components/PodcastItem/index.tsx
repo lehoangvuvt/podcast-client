@@ -2,6 +2,7 @@
 
 import useCustomRouter from "@/hooks/useCustomRouter";
 import { Podcast } from "@/types/apiResponse";
+import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 import { twMerge } from "tailwind-merge";
@@ -36,14 +37,22 @@ const PodcastItem: React.FC<Props> = ({ podcast, width = "20%" }) => {
       )}
     >
       <div
-        className={twMerge("aspect-square", "font-bold", "text-[20px]")}
-        style={{
-          width: "100%",
-          backgroundImage: `url("${podcast.thumbnail_url}")`,
-          backgroundPosition: "center",
-          backgroundSize: "cover",
-        }}
-      />
+        className={twMerge(
+          "aspect-square",
+          "font-bold",
+          "text-[20px]",
+          "relative",
+          "w-full"
+        )}
+      >
+        <Image
+          src={podcast.thumbnail_url}
+          alt={podcast.podcast_name.replaceAll(" ", "_") + "_thumbnail"}
+          layout="fill"
+          objectFit="cover"
+          objectPosition="center"
+        />
+      </div>
       <div className="w-full flex flex-col px-[5px] py-[10px]">
         <div className="w-full text-[rgba(255,255,255,0.9)] text-[15px] font-semibold">
           {podcast.podcast_name}

@@ -4,9 +4,6 @@ import EpisodeItem from "@/components/EpisodeItem";
 import PodcastItem from "@/components/PodcastItem";
 import MySkeleton, { SHAPE_ENUMS } from "@/components/Skeleton";
 import useHomeFeeds from "@/react-query/hooks/useHomeFeeds";
-import HomeService from "@/services/home.service";
-import { SearchResult } from "@/types/apiResponse";
-import { useEffect, useState } from "react";
 import { twMerge } from "tailwind-merge";
 
 const HomePage = () => {

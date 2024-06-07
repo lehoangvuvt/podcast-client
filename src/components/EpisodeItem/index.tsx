@@ -7,6 +7,7 @@ import useCustomRouter from "@/hooks/useCustomRouter";
 import AudioPlayButton from "../AudioPlayButton";
 import moment from "moment";
 import { useRouter } from "next/navigation";
+import Image from "next/image";
 
 type Props = {
   podcastDetails?: PodcastDetails;
@@ -20,7 +21,6 @@ const EpisodeItem: React.FC<Props> = ({
   podcast = null,
 }) => {
   const { pushRouteWithHistory } = useCustomRouter();
-
   const router = useRouter();
 
   useEffect(() => {
@@ -46,20 +46,21 @@ const EpisodeItem: React.FC<Props> = ({
         className={twMerge("w-full", "flex flex-row gap-[10px]")}
         key={episode.id}
       >
-        <div
-          className="h-[120px] w-[120px] rounded-md"
-          style={{
-            backgroundSize: "cover",
-            backgroundPosition: "center",
-            backgroundImage: `url(${
+        <div className="h-[120px] w-[120px] rounded-md relative">
+          <Image
+            src={
               podcastDetails
                 ? podcastDetails.thumbnail_url
                 : podcast
                 ? podcast.thumbnail_url
                 : ""
-            })`,
-          }}
-        />
+            }
+            alt={episode.episode_name.replaceAll(" ", "_") + "_thumbnail"}
+            layout="fill"
+            objectFit="cover"
+            objectPosition="center"
+          />
+        </div>
         <div className="flex-1 flex-col pl-[15px]">
           <div
             className={twMerge(
