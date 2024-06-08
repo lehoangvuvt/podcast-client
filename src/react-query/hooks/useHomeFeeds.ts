@@ -1,9 +1,9 @@
-import { SearchResult } from "@/types/apiResponse";
+import { GetHomeFeedsSuccessResponse } from "@/types/apiResponse";
 import { useQuery } from "react-query";
 import { QUERY_KEYS } from "../consts";
 import HomeService from "@/services/home.service";
 
-const getHomeFeeds = async (): Promise<SearchResult | null> => {
+const getHomeFeeds = async (): Promise<GetHomeFeedsSuccessResponse | null> => {
   const response = await HomeService.GetHomeFeeds();
   if (response.status === "success") {
     return response.data;

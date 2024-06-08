@@ -14,12 +14,14 @@ type Props = {
   podcastDetails?: PodcastDetails;
   podcast?: Podcast;
   episode: PodcastEpisode;
+  homeFeedMode?: boolean;
 };
 
 const EpisodeItem: React.FC<Props> = ({
   episode,
   podcastDetails = null,
   podcast = null,
+  homeFeedMode = false,
 }) => {
   const { pushRouteWithHistory } = useCustomRouter();
   const router = useRouter();
@@ -27,6 +29,77 @@ const EpisodeItem: React.FC<Props> = ({
   useEffect(() => {
     router.prefetch(`${routes.EPISODES}/${episode.uuid}`);
   }, [episode, router]);
+
+  if (homeFeedMode) {
+    return (
+      <div
+        onClick={() =>
+          pushRouteWithHistory(`${routes.EPISODES}/${episode.uuid}`)
+        }
+        className={twMerge(
+          "w-full",
+          "flex flex-col items-end",
+          "py-[20px] px-[20px]",
+          "cursor-pointer",
+          "transition-all",
+          "bg-[white]",
+          "hover:brightness-90"
+        )}
+      >
+        <div
+          className={twMerge("w-full", "flex flex-row gap-[10px]")}
+          key={episode.id}
+        >
+          <div className="h-[120px] w-[120px] rounded-md relative">
+            <Image
+              src={
+                podcastDetails
+                  ? podcastDetails.thumbnail_url
+                  : podcast
+                  ? podcast.thumbnail_url
+                  : ""
+              }
+              alt={episode.uuid + "_thumbnail"}
+              layout="fill"
+              objectFit="cover"
+              objectPosition="center"
+            />
+          </div>
+          <div className="flex-1 flex-col pl-[15px]">
+            <div
+              className={twMerge(
+                "w-full",
+                "text-[#121212]",
+                "font-bold",
+                "text-[1.1rem]"
+              )}
+            >
+              {episode.episode_name}
+            </div>
+
+            <div className="text-[#121212)] text-[0.8rem] font-semibold pt-[10px]">
+              {moment(episode.created_at).format("DD/MM/YYYY")}
+            </div>
+          </div>
+        </div>
+        {podcastDetails && (
+          <div
+            className={twMerge(
+              "w-[calc(100%-140px)]",
+              "h-[40px]",
+              "flex flex-row",
+              "items-center"
+            )}
+          >
+            <AudioPlayButton
+              episode={{ mode: "PLAYLIST", details: episode }}
+              podcastDetails={podcastDetails}
+            />
+          </div>
+        )}
+      </div>
+    );
+  }
 
   return (
     <div
@@ -74,6 +147,7 @@ const EpisodeItem: React.FC<Props> = ({
           >
             {episode.episode_name}
           </div>
+
           <div
             className={twMerge(
               "w-full",
@@ -93,6 +167,7 @@ const EpisodeItem: React.FC<Props> = ({
               {episode.episode_desc}
             </div>
           </div>
+
           <div className="text-[#121212)] text-[0.8rem] font-semibold pt-[10px]">
             {moment(episode.created_at).format("DD/MM/YYYY")}
           </div>

@@ -98,3 +98,7 @@ export type UserFavouriteItems = {
   favourite_episodes: PodcastEpisode[] | null;
   favourite_podcasts: Podcast[] | null;
 };
+
+export type GetHomeFeedsSuccessResponse = {
+  podcasts: PodcastDetails[] | null;
+};

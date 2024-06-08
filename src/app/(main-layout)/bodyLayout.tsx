@@ -33,12 +33,13 @@ export default function BodyLayout({
           "sticky",
           "z-[98]",
           "top-[55px]",
-          "bg-white]"
+          "bg-white]",
+          "shadow-sm"
         )}
       >
         <div
           className={twMerge(
-            "w-full flex bg-[white] h-[50px]",
+            "w-full flex bg-[white] h-[100%]",
             "flex-row gap-[10px] p-[15px]"
           )}
         >
@@ -74,9 +75,7 @@ export default function BodyLayout({
           </div>
         </div>
       </div>
-      <div className={twMerge("w-full", "pt-[20px]", "bg-[white]")}>
-        {children}
-      </div>
+      <div className={twMerge("w-full", "bg-[white]")}>{children}</div>
     </div>
   );
 }

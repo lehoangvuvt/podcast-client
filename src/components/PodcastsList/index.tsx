@@ -13,7 +13,7 @@ const PodcastsList: React.FC<Props> = ({ externalData = null }) => {
   const { podcasts, isLoading } = usePodcasts(externalData === null);
 
   return (
-    <div className="w-full flex flex-row flex-wrap gap-[15px] px-[15px]">
+    <div className="w-full flex flex-row flex-wrap gap-[15px] px-[15px] pt-[30px]">
       {externalData
         ? externalData.map((podcast) => (
             <PodcastItem width={"20%"} key={podcast.id} podcast={podcast} />

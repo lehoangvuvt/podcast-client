@@ -31,7 +31,7 @@ const SearchPage = () => {
 
   return (
     <div className="w-full flex flex-wrap flex-col">
-      <div className="fixed bg-[white] w-[77.9%] top-[60px] h-[80px] pl-[20px] flex items-center z-[100]">
+      <div className="fixed bg-[white] w-[79.1%] top-[60px] h-[80px] pl-[20px] flex items-center z-[100]">
         <input
           className={twMerge(
             "w-[40%] h-[45px]",

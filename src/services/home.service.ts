@@ -1,4 +1,4 @@
-import { SearchResult } from "@/types/apiResponse";
+import { GetHomeFeedsSuccessResponse, SearchResult } from "@/types/apiResponse";
 import baseAxios from "./axiosClient";
 
 const baseServiceURL = "/home";
@@ -7,7 +7,7 @@ const HomeService = {
   async GetHomeFeeds(): Promise<
     | {
         status: "success";
-        data: SearchResult;
+        data: GetHomeFeedsSuccessResponse;
       }
     | {
         status: "fail";
@@ -16,7 +16,9 @@ const HomeService = {
   > {
     try {
       const url = `${baseServiceURL}/feeds`;
-      const response = (await baseAxios.get(url)) as SearchResult;
+      const response = (await baseAxios.get(
+        url
+      )) as GetHomeFeedsSuccessResponse;
       return { status: "success", data: response };
     } catch (err: any) {
       return { status: "fail", errorMsg: err.response.data.error };

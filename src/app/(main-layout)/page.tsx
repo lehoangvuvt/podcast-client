@@ -10,51 +10,74 @@ const HomePage = () => {
   const { result, isLoading } = useHomeFeeds();
 
   return (
-    <div className="w-full flex flex-wrap flex-col pb-[50px]">
+    <div className="w-full flex flex-wrap flex-col pb-[50px] pt-[30px]">
       {isLoading ? (
         <div className="w-full mt-[0px] px-[15px] flex flex-row flex-wrap gap-[10px]">
           {Array(10)
             .fill("")
             .map((_, i) => (
-              <MySkeleton shape={SHAPE_ENUMS.SQUARE} key={i} width="19%" />
+              <MySkeleton
+                shape={SHAPE_ENUMS.CUSTOM}
+                customRatio={3.5 / 1}
+                key={i}
+                width="100%"
+              />
             ))}
         </div>
       ) : (
         <div className="w-full">
-          {result && result.episodes && result.episodes.length > 0 && (
-            <div className="w-full flex flex-col">
-              <div
-                className={twMerge(
-                  "w-full",
-                  "text-[#121212] text-[24px] font-bold",
-                  "px-[15px] pt-[0px] pb-[10px]"
-                )}
-              >
-                New releases
-              </div>
-              <div className="w-full flex flex-col">
-                {result.episodes.map((ep) => (
-                  <div key={ep.id} className="w-[99%]  overflow-hidden">
-                    <EpisodeItem episode={ep} podcast={ep.podcast} />
-                  </div>
-                ))}
-              </div>
-            </div>
-          )}
           {result && result.podcasts && result.podcasts.length > 0 && (
             <div className="w-full flex flex-col">
               <div
                 className={twMerge(
                   "w-full",
-                  "text-[#121212] text-[24px] font-bold",
-                  "px-[15px] pt-[15px] pb-[15px]"
+                  "text-[rgba(0,0,0,0.8)] text-[2.2rem] font-extrabold uppercase",
+                  "px-[25px] pt-[15px] pb-[30px]",
+                  "leading-10"
                 )}
               >
-                Popular Podcasts
+                Popular
+                <br />
+                Podcasts
               </div>
-              <div className="w-full flex flex-row flex-wrap gap-[10px] px-[20px]">
-                {result.podcasts.map((podcast) => (
-                  <PodcastItem key={podcast.id} podcast={podcast} width="19%" />
+              <div className="w-full flex flex-col flex-wrap gap-[20px] px-[20px]">
+                {result.podcasts.map((podcastDetails, i) => (
+                  <div
+                    key={podcastDetails.id}
+                    className="w-[90%] flex flex-row justify-between pb-[40px]"
+                  >
+                    <div className="w-[33%] flex flex-col items-start">
+                      <PodcastItem
+                        key={podcastDetails.id}
+                        podcast={podcastDetails}
+                        width="100%"
+                      />
+                      <div className="w-full text-[0.9rem] font-semibold text-[rgba(0,0,0,0.6)] px-[15px] -mt-[15px]">
+                        {podcastDetails.episodes.length} episodes
+                      </div>
+                      <div className="w-full text-[0.9rem] font-semibold text-[rgba(0,0,0,0.6)] px-[15px] mt-[10px]">
+                        {podcastDetails.podcast_desc.length <= 150
+                          ? podcastDetails.podcast_desc
+                          : `${podcastDetails.podcast_desc.substring(
+                              0,
+                              150
+                            )}...`}
+                      </div>
+                    </div>
+                    <div className="w-[55%] flex flex-col">
+                      {podcastDetails.episodes.length > 0 &&
+                        podcastDetails.episodes
+                          .slice(0, 3)
+                          .map((ep, i) => (
+                            <EpisodeItem
+                              key={ep.id}
+                              episode={ep}
+                              podcastDetails={podcastDetails}
+                              homeFeedMode
+                            />
+                          ))}
+                    </div>
+                  </div>
                 ))}
               </div>
             </div>

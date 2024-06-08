@@ -44,7 +44,7 @@ export default function Layout({
         "p-[8px]"
       )}
     >
-      <div className="w-[20%] h-[100%] flex flex-col gap-[10px]">
+      <div className="w-[18%] h-[100%] flex flex-col gap-[10px]">
         <div
           className={twMerge(
             sectionDivClass,

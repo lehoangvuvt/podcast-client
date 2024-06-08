@@ -8,7 +8,7 @@ const GenresList = () => {
   const { genres, isLoading } = useGenres();
 
   return (
-    <div className="w-full flex flex-row flex-wrap gap-[15px] px-[15px]">
+    <div className="w-full flex flex-row flex-wrap gap-[15px] px-[15px] pt-[30px]">
       {isLoading &&
         Array(10)
           .fill("")
