@@ -25,7 +25,33 @@ const HomePage = () => {
             ))}
         </div>
       ) : (
-        <div className="w-full">
+        <div className="w-full flex flex-col gap-[40px]">
+          {result && result.episodes && result.episodes.length > 0 && (
+            <div className="w-full flex flex-col">
+              <div
+                className={twMerge(
+                  "w-full",
+                  "text-[rgba(0,0,0,0.8)] text-[2.2rem] font-extrabold uppercase",
+                  "px-[25px] pt-[15px] pb-[30px]",
+                  "leading-10"
+                )}
+              >
+                Latest
+                <br />
+                episodes
+              </div>
+              <div className="w-full flex flex-row px-[10px]">
+                {result.episodes.map((ep) => (
+                  <EpisodeItem
+                    key={ep.id}
+                    episode={ep}
+                    podcast={ep.podcast}
+                    mode="HOME_FEED_1"
+                  />
+                ))}
+              </div>
+            </div>
+          )}
           {result && result.podcasts && result.podcasts.length > 0 && (
             <div className="w-full flex flex-col">
               <div
@@ -73,7 +99,7 @@ const HomePage = () => {
                               key={ep.id}
                               episode={ep}
                               podcastDetails={podcastDetails}
-                              homeFeedMode
+                              mode="HOME_FEED_2"
                             />
                           ))}
                     </div>

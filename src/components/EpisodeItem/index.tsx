@@ -14,14 +14,14 @@ type Props = {
   podcastDetails?: PodcastDetails;
   podcast?: Podcast;
   episode: PodcastEpisode;
-  homeFeedMode?: boolean;
+  mode?: "DEFAULT" | "HOME_FEED_1" | "HOME_FEED_2";
 };
 
 const EpisodeItem: React.FC<Props> = ({
   episode,
   podcastDetails = null,
   podcast = null,
-  homeFeedMode = false,
+  mode = "DEFAULT",
 }) => {
   const { pushRouteWithHistory } = useCustomRouter();
   const router = useRouter();
@@ -30,7 +30,7 @@ const EpisodeItem: React.FC<Props> = ({
     router.prefetch(`${routes.EPISODES}/${episode.uuid}`);
   }, [episode, router]);
 
-  if (homeFeedMode) {
+  if (mode !== "DEFAULT") {
     return (
       <div
         onClick={() =>
@@ -47,11 +47,23 @@ const EpisodeItem: React.FC<Props> = ({
         )}
       >
         <div
-          className={twMerge("w-full", "flex flex-row gap-[10px]")}
+          style={{
+            display: "flex",
+            flexFlow: mode === "HOME_FEED_1" ? "column wrap" : "row wrap",
+            gap: mode === "HOME_FEED_1" ? "20px" : "10px",
+          }}
+          className="w-full"
           key={episode.id}
         >
-          <div className="h-[120px] w-[120px] rounded-md relative">
+          <div
+            style={{
+              width: mode === "HOME_FEED_1" ? "100%" : "120px",
+              aspectRatio: 1,
+            }}
+            className="rounded-md relative"
+          >
             <Image
+              className="rounded-md shadow-lg"
               src={
                 podcastDetails
                   ? podcastDetails.thumbnail_url
@@ -65,7 +77,12 @@ const EpisodeItem: React.FC<Props> = ({
               objectPosition="center"
             />
           </div>
-          <div className="flex-1 flex-col pl-[15px]">
+          <div
+            style={{
+              paddingLeft: mode === "HOME_FEED_1" ? "0px" : "15px",
+            }}
+            className="flex-1 flex-col"
+          >
             <div
               className={twMerge(
                 "w-full",

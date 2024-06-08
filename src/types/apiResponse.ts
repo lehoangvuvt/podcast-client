@@ -101,4 +101,5 @@ export type UserFavouriteItems = {
 
 export type GetHomeFeedsSuccessResponse = {
   podcasts: PodcastDetails[] | null;
+  episodes: PodcastEpisodeDetails[] | null;
 };
