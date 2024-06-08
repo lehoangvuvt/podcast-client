@@ -1,5 +1,6 @@
 "use client";
 
+import { routes } from "@/config/routes";
 import useCustomRouter from "@/hooks/useCustomRouter";
 import { State } from "@/redux/store";
 import { useEffect } from "react";
@@ -12,7 +13,7 @@ const noAuth = (WrappedComponent: React.FC) => {
 
     useEffect(() => {
       if (userSlice.userInfo) {
-        pushRoute("/home");
+        pushRoute(routes.HOME);
       }
     }, [userSlice, pushRoute]);
     if (userSlice.userInfo) return null;

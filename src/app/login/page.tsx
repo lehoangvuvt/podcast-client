@@ -2,6 +2,7 @@
 
 import noAuth from "@/HOC/noAuth";
 import ResponseMessage from "@/components/ResponseMessage";
+import { routes } from "@/config/routes";
 import useCustomRouter from "@/hooks/useCustomRouter";
 import { setUserFavouriteItems, setUserInfo } from "@/redux/slices/userSlice";
 import UsersService from "@/services/users.service";
@@ -29,7 +30,7 @@ const LoginPage = () => {
       if (getFavItemsRes.status === "success") {
         dispatch(setUserFavouriteItems(getFavItemsRes.data));
       }
-      pushRoute("/home");
+      pushRoute(routes.HOME);
     } else {
       dispatch(setUserInfo(null));
       setErrorMsg(response.errorMsg);

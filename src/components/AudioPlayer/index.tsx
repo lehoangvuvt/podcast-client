@@ -14,6 +14,7 @@ import {
   playPrev,
 } from "@/redux/slices/audioPlayerSlice";
 import Ticker from "react-ticker";
+import { routes } from "@/config/routes";
 
 const CustomAudioPlayer = styled(AudioPlayer)`
   .rhap_current-time,
@@ -108,7 +109,7 @@ const MyAudioPlayer = () => {
           <div
             onClick={() =>
               pushRouteWithHistory(
-                `/home/episodes/${
+                `${routes.EPISODES}/${
                   audioPlayerSlice.mode === "SINGLE"
                     ? audioPlayerSlice.single?.uuid ?? ""
                     : audioPlayerSlice.playList?.currentPodcast.episodes.find(
@@ -164,8 +165,8 @@ const MyAudioPlayer = () => {
             onClick={() =>
               pushRouteWithHistory(
                 audioPlayerSlice.mode === "PLAYLIST"
-                  ? `/home/podcasts/${audioPlayerSlice.playList?.currentPodcast?.uuid}`
-                  : `/home/podcasts/${audioPlayerSlice.single?.podcast.uuid}`
+                  ? `${routes.PODCASTS}/${audioPlayerSlice.playList?.currentPodcast?.uuid}`
+                  : `${routes.PODCASTS}/${audioPlayerSlice.single?.podcast.uuid}`
               )
             }
             className="text-[rgba(255,255,255,0.65)] text-[13px] font-medium cursor-pointer hover:underline"

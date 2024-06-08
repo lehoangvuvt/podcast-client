@@ -8,6 +8,7 @@ import AudioPlayButton from "../AudioPlayButton";
 import moment from "moment";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
+import { routes } from "@/config/routes";
 
 type Props = {
   podcastDetails?: PodcastDetails;
@@ -24,12 +25,12 @@ const EpisodeItem: React.FC<Props> = ({
   const router = useRouter();
 
   useEffect(() => {
-    router.prefetch(`/home/episodes/${episode.uuid}`);
+    router.prefetch(`${routes.EPISODES}/${episode.uuid}`);
   }, [episode, router]);
 
   return (
     <div
-      onClick={() => pushRouteWithHistory(`/home/episodes/${episode.uuid}`)}
+      onClick={() => pushRouteWithHistory(`${routes.EPISODES}/${episode.uuid}`)}
       style={{
         borderBottom: "1px solid rgba(255,255,255,0.2)",
       }}

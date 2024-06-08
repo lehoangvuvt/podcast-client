@@ -1,5 +1,6 @@
 "use client";
 
+import { routes } from "@/config/routes";
 import useCustomRouter from "@/hooks/useCustomRouter";
 import { Podcast } from "@/types/apiResponse";
 import Image from "next/image";
@@ -17,12 +18,12 @@ const PodcastItem: React.FC<Props> = ({ podcast, width = "20%" }) => {
   const router = useRouter();
 
   useEffect(() => {
-    router.prefetch(`/home/podcasts/${podcast.uuid}`);
+    router.prefetch(`${routes.PODCASTS}/${podcast.uuid}`);
   }, [podcast, router]);
 
   return (
     <div
-      onClick={() => pushRouteWithHistory(`/home/podcasts/${podcast.uuid}`)}
+      onClick={() => pushRouteWithHistory(`${routes.PODCASTS}/${podcast.uuid}`)}
       style={{
         width: width,
         display: "flex",

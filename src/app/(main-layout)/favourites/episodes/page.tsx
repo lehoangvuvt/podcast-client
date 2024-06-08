@@ -1,6 +1,7 @@
 "use client";
 
 import withAuth from "@/HOC/withAuth";
+import { routes } from "@/config/routes";
 import useCustomRouter from "@/hooks/useCustomRouter";
 import { State } from "@/redux/store";
 import { useRouter } from "next/navigation";
@@ -21,7 +22,7 @@ const FavouritesEpisodes = () => {
       userSlice.favouriteItems.favourite_episodes.length > 0
     ) {
       userSlice.favouriteItems.favourite_episodes.forEach((ep) => {
-        router.prefetch(`/home/episodes/${ep.uuid}`);
+        router.prefetch(`${routes.EPISODES}/${ep.uuid}`);
       });
     }
   }, [userSlice, router]);
@@ -58,7 +59,7 @@ const FavouritesEpisodes = () => {
           userSlice.favouriteItems.favourite_episodes.map((episode, i) => (
             <div
               onClick={() =>
-                pushRouteWithHistory(`/home/episodes/${episode.uuid}`)
+                pushRouteWithHistory(`${routes.EPISODES}/${episode.uuid}`)
               }
               className="w-full flex flex-row py-[18px] px-[30px] 
               cursor-pointer items-center font-medium text-[14px] 

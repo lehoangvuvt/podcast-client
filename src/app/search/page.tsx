@@ -3,6 +3,7 @@
 import EpisodeItem from "@/components/EpisodeItem";
 import PodcastItem from "@/components/PodcastItem";
 import MySkeleton, { SHAPE_ENUMS } from "@/components/Skeleton";
+import { routes } from "@/config/routes";
 import useSearchItems from "@/react-query/hooks/useSearchItems";
 import { useSearchParams } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
@@ -21,10 +22,10 @@ const SearchPage = () => {
 
     dbTimeout.current = setTimeout(() => {
       if (q.trim().length === 0) {
-        window.history.replaceState({}, "", `/search`);
+        window.history.replaceState({}, "", routes.SEARCH);
         return;
       }
-      window.history.replaceState({}, "", `/search?q=${q}`);
+      window.history.replaceState({}, "", `${routes.SEARCH}?q=${q}`);
     }, 300);
   }, [q]);
 
@@ -37,7 +38,7 @@ const SearchPage = () => {
             "linear-gradient(to left, #121212, rgba(255,255,255,0.05))",
           boxSizing: "border-box",
         }}
-        className="fixed w-[70%] top-[60px] h-[80px] pl-[20px] flex items-center"
+        className="fixed w-[70%] top-[60px] h-[80px] pl-[20px] flex items-center z-[100]  "
       >
         <input
           className={twMerge(

@@ -1,5 +1,6 @@
 "use client";
 
+import { routes } from "@/config/routes";
 import useCustomRouter from "@/hooks/useCustomRouter";
 import { Genre } from "@/types/apiResponse";
 import { useRouter } from "next/navigation";
@@ -17,13 +18,13 @@ const GenreItem: React.FC<Props> = ({ genre, width = "20%" }) => {
   const router = useRouter();
 
   useEffect(() => {
-    router.prefetch(`/home/genres/${genre.uuid}`);
+    router.prefetch(`${routes.GENRES}/${genre.uuid}`);
   }, [genre, router]);
 
   return (
     <div
       onClick={() => {
-        pushRouteWithHistory(`/home/genres/${genre.uuid}`);
+        pushRouteWithHistory(`${routes.GENRES}/${genre.uuid}`);
       }}
       className={twMerge(
         "aspect-video",

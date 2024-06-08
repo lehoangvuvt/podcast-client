@@ -4,6 +4,7 @@ import "./globals.css";
 import ReduxProvider from "@/redux/provider";
 import ReactQueryProvider from "@/react-query/provider";
 import AuthWrapper from "@/middlewares/authWrapper";
+import Layout from "./baseLayout";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -22,7 +23,9 @@ export default function RootLayout({
       <body className={inter.className}>
         <ReactQueryProvider>
           <ReduxProvider>
-            <AuthWrapper>{children}</AuthWrapper>
+            <AuthWrapper>
+              <Layout>{children}</Layout>
+            </AuthWrapper>
           </ReduxProvider>
         </ReactQueryProvider>
       </body>

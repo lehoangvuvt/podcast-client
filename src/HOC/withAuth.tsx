@@ -1,5 +1,6 @@
 "use client";
 
+import { routes } from "@/config/routes";
 import useCustomRouter from "@/hooks/useCustomRouter";
 import { State } from "@/redux/store";
 import { useEffect } from "react";
@@ -12,7 +13,7 @@ const withAuth = (WrappedComponent: React.FC) => {
 
     useEffect(() => {
       if (userSlice.userInfo) return;
-      pushRoute("/home");
+      pushRoute(routes.HOME);
     }, [userSlice, pushRoute]);
 
     return <WrappedComponent {...props} />;
