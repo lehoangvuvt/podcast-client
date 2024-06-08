@@ -58,7 +58,7 @@ const SearchPage = () => {
         />
       </div>
       {isLoading ? (
-        <div className="w-full mt-[80px] text-[red] flex flex-row flex-wrap gap-[10px]">
+        <div className="w-full text-[red] flex flex-row flex-wrap gap-[10px]">
           {Array(10)
             .fill("")
             .map((_, i) => (
@@ -66,7 +66,7 @@ const SearchPage = () => {
             ))}
         </div>
       ) : (
-        <div className="w-full mt-[80px]">
+        <div className="w-full">
           {result && result.podcasts && result.podcasts.length > 0 && (
             <div className="w-full flex flex-col">
               <div
