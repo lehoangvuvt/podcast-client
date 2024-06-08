@@ -64,9 +64,9 @@ const GenreDetailsView: React.FC<Props> = ({ details }) => {
       </div>
       <div
         style={{
-          backgroundImage: `linear-gradient(to bottom,${dominantColor}, 0.1%, black)`,
+          backgroundImage: `linear-gradient(to bottom,${dominantColor}, 0.03%, white)`,
         }}
-        className="w-full flex flex-col gap-[10px]"
+        className="w-full flex flex-col gap-[10px] pt-[40px] pb-[50px]"
       >
         {details.podcasts?.length > 0 && (
           <PodcastsList externalData={details.podcasts} />

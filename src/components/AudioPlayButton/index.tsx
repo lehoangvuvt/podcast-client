@@ -156,7 +156,7 @@ const AudioPlayButton: React.FC<Props> = ({
         "rounded-full",
         "w-[45px]",
         "h-[45px]",
-        "bg-[white]",
+        "bg-[rgba(0,0,0,0.8)]",
         "flex",
         "items-center",
         "justify-center",
@@ -176,10 +176,10 @@ const AudioPlayButton: React.FC<Props> = ({
             isPaused={false}
           />
         ) : (
-          <PauseIcon />
+          <PauseIcon htmlColor="white" />
         )
       ) : (
-        <PlayArrowIcon />
+        <PlayArrowIcon htmlColor="white" />
       )}
     </button>
   );

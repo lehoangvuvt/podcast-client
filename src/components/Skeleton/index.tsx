@@ -50,7 +50,11 @@ const MySkeleton: React.FC<Props> = ({
   };
   return (
     <div style={{ width: width, ...style }}>
-      <SkeletonTheme width={"100%"} baseColor="#202020" highlightColor="#444">
+      <SkeletonTheme
+        width={"100%"}
+        baseColor="rgba(0,0,0,0.05)"
+        highlightColor="rgba(0,0,0,0.000001)"
+      >
         <Skeleton
           style={{
             aspectRatio: shapePropertiesMap[shape].aspectRatio,

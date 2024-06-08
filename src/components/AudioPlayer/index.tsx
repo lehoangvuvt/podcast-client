@@ -87,7 +87,7 @@ const MyAudioPlayer = () => {
   };
 
   return (
-    <div className="w-full h-full flex flex-row items-center">
+    <div className="w-full h-full flex flex-row items-center bg-[white]">
       <div className="w-[25%] h-full flex flex-row gap-[20px] items-center p-[20px]">
         <div
           className="w-[22%] aspect-square"
@@ -126,7 +126,7 @@ const MyAudioPlayer = () => {
               width: "100%",
               overflow: "hidden",
             }}
-            className="text-[rgba(255,255,255,0.95)] text-[14px] font-medium  cursor-pointer hover:underline"
+            className="text-#121212 text-[0.9rem] font-semibold cursor-pointer hover:underline"
           >
             {audioPlayerSlice.playerState !== "STOP" ? (
               <>
@@ -169,7 +169,7 @@ const MyAudioPlayer = () => {
                   : `${routes.PODCASTS}/${audioPlayerSlice.single?.podcast.uuid}`
               )
             }
-            className="text-[rgba(255,255,255,0.65)] text-[13px] font-medium cursor-pointer hover:underline"
+            className="text-[rgba(0,0,0,0.65)] text-[0.85rem] font-semibold cursor-pointer hover:underline"
           >
             {audioPlayerSlice.mode === "PLAYLIST"
               ? audioPlayerSlice.playList?.currentPodcast?.podcast_name ?? ""

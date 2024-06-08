@@ -5,7 +5,7 @@ import useCustomRouter from "@/hooks/useCustomRouter";
 import { usePathname } from "next/navigation";
 import { twMerge } from "tailwind-merge";
 
-export default function HeaderLayout({
+export default function BodyLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
@@ -32,26 +32,22 @@ export default function HeaderLayout({
           "flex flex-col",
           "sticky",
           "z-[98]",
-          "top-[55px]"
+          "top-[55px]",
+          "bg-white]"
         )}
-        style={{
-          backgroundColor: "#121212",
-          backgroundImage:
-            "linear-gradient(to left, #121212, rgba(255,255,255,0.05))",
-        }}
       >
         <div
-          style={{
-            display: "flex",
-          }}
-          className={twMerge("w-full h-[50px]", "flex-row gap-[10px] p-[15px]")}
+          className={twMerge(
+            "w-full flex bg-[white] h-[50px]",
+            "flex-row gap-[10px] p-[15px]"
+          )}
         >
           <div
             onClick={() => pushRouteWithHistory(routes.HOME)}
             className={headerItemClass}
             style={{
-              background: pathName === routes.HOME ? "white" : "#2e2e2e",
-              color: pathName === routes.HOME ? "#2e2e2e" : "white",
+              background: pathName !== routes.HOME ? "white" : "#2e2e2e",
+              color: pathName !== routes.HOME ? "#2e2e2e" : "white",
             }}
           >
             Discover
@@ -60,8 +56,8 @@ export default function HeaderLayout({
             onClick={() => pushRouteWithHistory(routes.GENRES)}
             className={headerItemClass}
             style={{
-              background: pathName === routes.GENRES ? "white" : "#2e2e2e",
-              color: pathName === routes.GENRES ? "#2e2e2e" : "white",
+              background: pathName !== routes.GENRES ? "white" : "#2e2e2e",
+              color: pathName !== routes.GENRES ? "#2e2e2e" : "white",
             }}
           >
             Genres
@@ -70,15 +66,17 @@ export default function HeaderLayout({
             onClick={() => pushRouteWithHistory(routes.PODCASTS)}
             className={headerItemClass}
             style={{
-              background: pathName === routes.PODCASTS ? "white" : "#2e2e2e",
-              color: pathName === routes.PODCASTS ? "#2e2e2e" : "white",
+              background: pathName !== routes.PODCASTS ? "white" : "#2e2e2e",
+              color: pathName !== routes.PODCASTS ? "#2e2e2e" : "white",
             }}
           >
             Podcasts
           </div>
         </div>
       </div>
-      <div className={twMerge("w-full", "mt-[40px]")}>{children}</div>
+      <div className={twMerge("w-full", "pt-[20px]", "bg-[white]")}>
+        {children}
+      </div>
     </div>
   );
 }

@@ -79,7 +79,7 @@ const EpisodeDetailsView: React.FC<Props> = ({ details }) => {
           className={twMerge(
             "w-[80%]",
             "px-[20px] pt-[20px]",
-            "text-[rgba(255,255,255,0.7)] text-[13px] font-medium"
+            "text-[rgba(0,0,0,0.6)] text-[0.95rem] font-semibold"
           )}
         >
           {moment(details.created_at).format("DD/MM/YYYY")}
@@ -93,8 +93,8 @@ const EpisodeDetailsView: React.FC<Props> = ({ details }) => {
         <div
           className={twMerge(
             "w-full",
-            "px-[20px] pt-[40px] pb-[10px]",
-            "text-[white] text-[22px] font-bold"
+            "px-[20px] pt-[40px] pb-[15px]",
+            "text-[#121212] text-[1.5rem] font-bold"
           )}
         >
           Description
@@ -104,7 +104,7 @@ const EpisodeDetailsView: React.FC<Props> = ({ details }) => {
             "w-[75%]",
             "px-[20px]",
             "pb-[20px]",
-            "text-[rgba(255,255,255,0.7)] text-[14px] font-medium"
+            "text-[rgba(0,0,0,0.8)] text-[0.98rem] font-medium"
           )}
         >
           {details.episode_desc}
@@ -116,7 +116,7 @@ const EpisodeDetailsView: React.FC<Props> = ({ details }) => {
               className={twMerge(
                 "w-full",
                 "px-[20px] pt-[40px] pb-[10px]",
-                "text-[white] text-[22px] font-bold"
+                "text-[#121212] text-[1.5em] font-bold"
               )}
             >
               Relative Episodes

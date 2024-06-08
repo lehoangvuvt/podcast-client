@@ -33,7 +33,7 @@ const PodcastItem: React.FC<Props> = ({ podcast, width = "20%" }) => {
         "rounded-sm",
         "cursor-pointer",
         "transition-all",
-        "hover:bg-[rgba(255,255,255,0.1)]",
+        "hover:brightness-90",
         "p-[10px]"
       )}
     >
@@ -55,7 +55,7 @@ const PodcastItem: React.FC<Props> = ({ podcast, width = "20%" }) => {
         />
       </div>
       <div className="w-full flex flex-col px-[5px] py-[10px]">
-        <div className="w-full text-[rgba(255,255,255,0.9)] text-[15px] font-semibold">
+        <div className="w-full text-[#121212] text-[0.95rem] font-semibold">
           {podcast.podcast_name}
         </div>
       </div>

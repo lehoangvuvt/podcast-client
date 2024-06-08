@@ -32,7 +32,7 @@ const EpisodeItem: React.FC<Props> = ({
     <div
       onClick={() => pushRouteWithHistory(`${routes.EPISODES}/${episode.uuid}`)}
       style={{
-        borderBottom: "1px solid rgba(255,255,255,0.2)",
+        borderBottom: "1px solid rgba(0,0,0,0.2)",
       }}
       className={twMerge(
         "w-full",
@@ -40,7 +40,8 @@ const EpisodeItem: React.FC<Props> = ({
         "py-[20px] px-[30px]",
         "cursor-pointer",
         "transition-all",
-        "hover:bg-[rgba(255,255,255,0.1)]"
+        "bg-[white]",
+        "hover:brightness-90"
       )}
     >
       <div
@@ -66,9 +67,9 @@ const EpisodeItem: React.FC<Props> = ({
           <div
             className={twMerge(
               "w-full",
-              "text-[rgba(255,255,255,0.95)]",
-              "font-medium",
-              "text-[15px]"
+              "text-[#121212]",
+              "font-bold",
+              "text-[1.1rem]"
             )}
           >
             {episode.episode_name}
@@ -76,9 +77,9 @@ const EpisodeItem: React.FC<Props> = ({
           <div
             className={twMerge(
               "w-full",
-              "text-[rgba(255,255,255,0.65)]",
-              "font-medium",
-              "text-[14px]",
+              "text-[rgba(0,0,0,0.7)]",
+              "font-semibold",
+              "text-[0.9rem]",
               "pt-[5px]"
             )}
           >
@@ -92,7 +93,7 @@ const EpisodeItem: React.FC<Props> = ({
               {episode.episode_desc}
             </div>
           </div>
-          <div className="text-[rgba(255,255,255,0.9)] text-[13px] font-semibold pt-[10px]">
+          <div className="text-[#121212)] text-[0.8rem] font-semibold pt-[10px]">
             {moment(episode.created_at).format("DD/MM/YYYY")}
           </div>
         </div>

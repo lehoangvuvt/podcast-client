@@ -105,7 +105,7 @@ const AddToFavButton: React.FC<Props> = ({ type, itemId }) => {
             onClick={handleAddToFav}
             fontSize="inherit"
             color="inherit"
-            style={{ color: "rgba(255,255,255,0.6)" }}
+            style={{ color: "rgba(0,0,0,0.4)" }}
           />
         )}
       </button>

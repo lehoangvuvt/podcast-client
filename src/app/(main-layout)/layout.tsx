@@ -14,14 +14,14 @@ import AuthConditionalRenderWrapper from "@/middlewares/authConditionalRenderWra
 import { useSelector } from "react-redux";
 import { State } from "@/redux/store";
 import { routes } from "@/config/routes";
-import HeaderLayout from "./headerLayout";
+import BodyLayout from "./bodyLayout";
 
 export default function Layout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const sectionDivClass = twMerge("bg-[#121212]", "rounded-[8px]");
+  const sectionDivClass = twMerge("bg-[white]", "rounded-[8px]", "shadow-sm");
   const { pushRouteWithHistory } = useCustomRouter();
   const pathName = usePathname();
   const userSlice = useSelector((state: State) => state.user);
@@ -39,12 +39,12 @@ export default function Layout({
       className={twMerge(
         "absolute",
         "w-[100%]",
-        "bg-[#000000]",
+        "bg-[rgba(0,0,0,0.05)]",
         "flex flex-row gap-[10px]",
         "p-[8px]"
       )}
     >
-      <div className="w-[28%] h-[100%] flex flex-col gap-[10px]">
+      <div className="w-[20%] h-[100%] flex flex-col gap-[10px]">
         <div
           className={twMerge(
             sectionDivClass,
@@ -59,8 +59,7 @@ export default function Layout({
           <div
             onClick={() => pushRouteWithHistory("/")}
             style={{
-              color:
-                pathName === routes.HOME ? "white" : "rgba(255,255,255,0.7)",
+              color: pathName === routes.HOME ? "#121212" : "rgba(0,0,0,0.6)",
             }}
             className={baseHeaderLinkClass}
           >
@@ -70,8 +69,7 @@ export default function Layout({
           <div
             onClick={() => pushRouteWithHistory(routes.SEARCH)}
             style={{
-              color:
-                pathName === routes.SEARCH ? "white" : "rgba(255,255,255,0.7)",
+              color: pathName === routes.SEARCH ? "#121212" : "rgba(0,0,0,0.6)",
             }}
             className={baseHeaderLinkClass}
           >
@@ -90,13 +88,14 @@ export default function Layout({
               "flex-1",
               "flex flex-col gap-[20px]",
               "px-[15px]",
-              "py-[20px]"
+              "py-[20px]",
+              "bg-[white]"
             )}
           >
             <div
               className={twMerge(
                 "w-full",
-                "text-[rgba(255,255,255,0.6)] font-bold",
+                "text-[rgba(0,0,0,0.7)] font-bold",
                 "text-[16px]",
                 "flex items-center gap-[10px]"
               )}
@@ -109,7 +108,7 @@ export default function Layout({
                 style={{
                   background:
                     pathName === routes.FAVOURITES.EPISODES
-                      ? "rgba(255,255,255,0.1"
+                      ? "rgba(0,0,0,0.06)"
                       : "transparent",
                 }}
                 className={twMerge(
@@ -124,7 +123,7 @@ export default function Layout({
                 <div
                   className={twMerge(
                     "w-full",
-                    "text-[rgba(255,255,255,0.9)] font-semibold text-[15px]"
+                    "text-[#121212] font-semibold text-[15px]"
                   )}
                 >
                   Favourite episodes
@@ -132,7 +131,7 @@ export default function Layout({
                 <div
                   className={twMerge(
                     "w-full",
-                    "text-[rgba(255,255,255,0.5)] font-medium text-[15px]"
+                    "text-[rgba(0,0,0,0.6)] font-semibold text-[16px]"
                   )}
                 >
                   {userSlice.favouriteItems?.favourite_episodes?.length ?? 0}{" "}
@@ -146,23 +145,18 @@ export default function Layout({
       <div
         className={twMerge(
           sectionDivClass,
-          "w-[72%]",
           "overflow-y-auto",
           "overflow-x-hidden",
-          "flex flex-col",
+          "flex flex-1 flex-col",
           "relative",
           "items-start",
           "justify-start"
         )}
       >
         <div
-          style={{
-            backgroundColor: "#121212",
-            backgroundImage:
-              "linear-gradient(to left, #121212, rgba(255,255,255,0.05))",
-          }}
           className={twMerge(
             "w-[100%]",
+            "bg-[white]",
             "sticky z-[100]",
             "top-[0px]",
             "flex flex-row",
@@ -175,7 +169,7 @@ export default function Layout({
           <UserInfoButton />
         </div>
         <Suspense fallback={<h1>Loading...</h1>}>
-          <HeaderLayout>{children}</HeaderLayout>
+          <BodyLayout>{children}</BodyLayout>
         </Suspense>
       </div>
       <div className="fixed bottom-0 left-0 z-[100] w-full h-[100px] bg-[#000000] flex items-center justify-center">

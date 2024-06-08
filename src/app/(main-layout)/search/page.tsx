@@ -31,25 +31,21 @@ const SearchPage = () => {
 
   return (
     <div className="w-full flex flex-wrap flex-col">
-      <div
-        style={{
-          backgroundColor: "#121212",
-          backgroundImage:
-            "linear-gradient(to left, #121212, rgba(255,255,255,0.05))",
-          boxSizing: "border-box",
-        }}
-        className="fixed w-[70%] top-[60px] h-[80px] pl-[20px] flex items-center z-[100]  "
-      >
+      <div className="fixed bg-[white] w-[77.9%] top-[60px] h-[80px] pl-[20px] flex items-center z-[100]">
         <input
           className={twMerge(
             "w-[40%] h-[45px]",
-            "bg-[#2a2a2a]",
-            "text-[white]",
-            "text-[16px]",
+            "bg-[white]",
+            "text-[#121212]",
+            "text-[0.95rem]",
             "rounded-3xl",
             "outline-none",
             "px-[20px]",
-            "placeholder-[rgba(255,255,255,0.4)]"
+            "placeholder-[rgba(0,0,0,0.55)]",
+            "border-solid",
+            "border-[1px]",
+            "border-[rgba(0,0,0,0.6)]",
+            "font-medium"
           )}
           placeholder="Search podcasts, episodes, genres..."
           type="text"
@@ -72,7 +68,7 @@ const SearchPage = () => {
               <div
                 className={twMerge(
                   "w-full",
-                  "text-[white] text-[24px] font-bold",
+                  "text-[#121212] text-[1.55rem] font-bold",
                   "px-[15px] pt-[15px] pb-[15px]"
                 )}
               >
@@ -90,7 +86,7 @@ const SearchPage = () => {
               <div
                 className={twMerge(
                   "w-full",
-                  "text-[white] text-[24px] font-bold",
+                  "text-[#121212] text-[1.55rem] font-bold",
                   "px-[15px] pt-[15px] pb-[10px]"
                 )}
               >

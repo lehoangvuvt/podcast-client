@@ -12,7 +12,7 @@ const HomePage = () => {
   return (
     <div className="w-full flex flex-wrap flex-col pb-[50px]">
       {isLoading ? (
-        <div className="w-full mt-[0px] text-[red] px-[15px] flex flex-row flex-wrap gap-[10px]">
+        <div className="w-full mt-[0px] px-[15px] flex flex-row flex-wrap gap-[10px]">
           {Array(10)
             .fill("")
             .map((_, i) => (
@@ -26,7 +26,7 @@ const HomePage = () => {
               <div
                 className={twMerge(
                   "w-full",
-                  "text-[white] text-[24px] font-bold",
+                  "text-[#121212] text-[24px] font-bold",
                   "px-[15px] pt-[0px] pb-[10px]"
                 )}
               >
@@ -46,7 +46,7 @@ const HomePage = () => {
               <div
                 className={twMerge(
                   "w-full",
-                  "text-[white] text-[24px] font-bold",
+                  "text-[#121212] text-[24px] font-bold",
                   "px-[15px] pt-[15px] pb-[15px]"
                 )}
               >

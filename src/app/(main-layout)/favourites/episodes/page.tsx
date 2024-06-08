@@ -63,15 +63,14 @@ const FavouritesEpisodes = () => {
               }
               className="w-full flex flex-row py-[18px] px-[30px] 
               cursor-pointer items-center font-medium text-[14px] 
-              hover:bg-[rgba(255,255,255,0.1)]
+              hover:bg-[rgba(0,0,0,0.06)]
+              transition-all
               rounded-sm
               "
               key={episode.id}
             >
-              <div className="text-[rgba(255,255,255,0.5)] w-[40px]">
-                {i + 1}
-              </div>
-              <div className="text-[rgba(255,255,255,0.9)] flex-1">
+              <div className="text-[rgba(0,0,0,0.5)] w-[40px]">{i + 1}</div>
+              <div className="text-[#121212] flex-1">
                 {episode.episode_name}
               </div>
             </div>
