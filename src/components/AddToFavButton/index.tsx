@@ -9,7 +9,7 @@ import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import UsersService from "@/services/users.service";
 import { useQueryClient } from "react-query";
-import { ToastContainer, toast, Flip } from "react-toastify";
+import { toast } from "react-toastify";
 
 import "react-toastify/dist/ReactToastify.css";
 import { setUserFavouriteItems } from "@/redux/slices/userSlice";
@@ -109,18 +109,6 @@ const AddToFavButton: React.FC<Props> = ({ type, itemId }) => {
           />
         )}
       </button>
-      <ToastContainer
-        hideProgressBar
-        autoClose={500}
-        transition={Flip}
-        theme="dark"
-        style={{
-          position: "fixed",
-          zIndex: 1000,
-          top: "50%",
-          left: "calc(50% - 80px)",
-        }}
-      />
     </AuthConditionalRenderWrapper>
   );
 };

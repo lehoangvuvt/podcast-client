@@ -1,7 +1,7 @@
 import { FacebookShareButton } from "react-share";
 import FacebookIcon from "@mui/icons-material/Facebook";
 import InsertLinkIcon from "@mui/icons-material/InsertLink";
-import { Flip, ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 type Props = {
@@ -48,18 +48,6 @@ const SocialBar: React.FC<Props> = ({
       >
         <InsertLinkIcon /> Copy link
       </div>
-      <ToastContainer
-        hideProgressBar
-        autoClose={500}
-        transition={Flip}
-        theme="dark"
-        style={{
-          position: "fixed",
-          zIndex: 1000,
-          top: "15%",
-          left: "calc(50% - 80px)",
-        }}
-      />
     </div>
   );
 };
