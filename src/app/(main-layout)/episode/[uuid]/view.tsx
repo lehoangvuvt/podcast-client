@@ -7,12 +7,9 @@ import EpisodeItem from "@/components/EpisodeItem";
 import MySkeleton, { SHAPE_ENUMS } from "@/components/Skeleton";
 import AuthConditionalRenderWrapper from "@/middlewares/authConditionalRenderWrapper";
 import useRelativeEpisodes from "@/react-query/hooks/useRelativeEpisodes";
-import { State } from "@/redux/store";
 import { PodcastEpisodeDetails } from "@/types/apiResponse";
-import { FastAverageColor } from "fast-average-color";
 import moment from "moment";
-import { useEffect, useRef, useState } from "react";
-import { useSelector } from "react-redux";
+import { useRef } from "react";
 import { twMerge } from "tailwind-merge";
 
 type Props = {
@@ -21,88 +18,66 @@ type Props = {
 
 const EpisodeDetailsView: React.FC<Props> = ({ details }) => {
   const thumbnailImgRef = useRef<HTMLImageElement>(null);
-  const [dominantColor, setDominantColor] = useState("#111111");
-  const userSlice = useSelector((state: State) => state.user);
   const { episodes: relativeEps, isLoading: isLoadingRelativeEps } =
     useRelativeEpisodes(details.episode_no, details.podcast_id);
-
-  useEffect(() => {
-    if (!thumbnailImgRef || !thumbnailImgRef.current) return;
-    const getColor = async () => {
-      if (!thumbnailImgRef || !thumbnailImgRef.current) return;
-      const fac = new FastAverageColor();
-      try {
-        const color = await fac.getColorAsync(thumbnailImgRef.current);
-        setDominantColor(color.hex);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    getColor();
-  }, []);
 
   return (
     <div
       style={{
-        marginTop: "-95px",
+        marginTop: "-55px",
         zIndex: 99,
         position: "absolute",
+        background: "white",
       }}
       className="w-full flex flex-col pb-[100px]"
     >
-      <div
-        className="w-full h-[300px] flex flex-row items-center p-[30px] gap-[30px]"
-        style={{
-          backgroundAttachment: "fixed",
-          backgroundImage: `linear-gradient(to bottom, ${dominantColor} 10%, black)`,
-        }}
-      >
-        <img
-          style={{
-            objectFit: "cover",
-            objectPosition: "center",
-          }}
-          className="h-[85%] aspect-square rounded-[5px] shadow-xl"
-          crossOrigin="anonymous"
-          ref={thumbnailImgRef}
-          src={details.podcast.thumbnail_url}
-          alt="thumbnail-image"
-        />
-        <div className="h-full flex-1 flex flex-col justify-center">
-          <div className="text-[white] font-bold text-[45px]">
+      <div className="w-full flex flex-row items-center p-[30px]">
+        <div className="w-[350px] h-[350px]">
+          <img
+            style={{
+              objectFit: "cover",
+              objectPosition: "center",
+            }}
+            className="h-[85%] aspect-square rounded-[5px] shadow-xl"
+            crossOrigin="anonymous"
+            ref={thumbnailImgRef}
+            src={details.podcast.thumbnail_url}
+            alt="thumbnail-image"
+          />
+        </div>
+
+        <div className="h-full flex-1 flex flex-col pr-[80px] gap-[25px]">
+          <div className="w-full text-[rgba(0,0,0,0.5)] font-medium text-[0.95rem]">
+            {moment(details.created_at).format("DD/MM/YYYY")}
+          </div>
+
+          <div className="w-full text-[#121212] font-semibold text-[2.4rem]">
             {details?.episode_name}
+          </div>
+
+          <div className="w-full pl-[20px] flex flex-row gap-[20px]">
+            <AudioPlayButton episode={{ mode: "SINGLE", details }} />
+            <AuthConditionalRenderWrapper required>
+              <AddToFavButton type="episode" itemId={details.id} />
+            </AuthConditionalRenderWrapper>
           </div>
         </div>
       </div>
       <div className="w-full">
         <div
           className={twMerge(
-            "w-[80%]",
-            "px-[20px] pt-[20px]",
-            "text-[rgba(0,0,0,0.6)] text-[0.95rem] font-semibold"
-          )}
-        >
-          {moment(details.created_at).format("DD/MM/YYYY")}
-        </div>
-        <div className="w-full pt-[20px] pl-[20px] flex flex-row gap-[20px]">
-          <AudioPlayButton episode={{ mode: "SINGLE", details }} />
-          <AuthConditionalRenderWrapper required>
-            <AddToFavButton type="episode" itemId={details.id} />
-          </AuthConditionalRenderWrapper>
-        </div>
-        <div
-          className={twMerge(
             "w-full",
-            "px-[20px] pt-[40px] pb-[15px]",
-            "text-[#121212] text-[1.5rem] font-bold"
+            "text-[rgba(0,0,0,0.8)] text-[2rem] font-extrabold uppercase",
+            "px-[25px] pt-[20px] pb-[30px]",
+            "leading-10"
           )}
         >
-          Description
+          Episode content
         </div>
         <div
           className={twMerge(
             "w-[75%]",
-            "px-[20px]",
+            "px-[25px]",
             "pb-[20px]",
             "text-[rgba(0,0,0,0.8)] text-[0.98rem] font-medium"
           )}
@@ -115,11 +90,12 @@ const EpisodeDetailsView: React.FC<Props> = ({ details }) => {
             <div
               className={twMerge(
                 "w-full",
-                "px-[20px] pt-[40px] pb-[10px]",
-                "text-[#121212] text-[1.5em] font-bold"
+                "text-[rgba(0,0,0,0.8)] text-[2rem] font-extrabold uppercase",
+                "px-[25px] pt-[30px] pb-[10px]",
+                "leading-10"
               )}
             >
-              Relative Episodes
+              Other episodes
             </div>
           ))}
         <div className="w-full flex flex-row flex-wrap p-[15px]">

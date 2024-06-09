@@ -20,7 +20,7 @@ export default function BodyLayout({
     "items-center",
     "p-[10px]",
     "rounded-xl",
-    "text-[13px]",
+    "text-[0.8rem]",
     "font-[500]"
   );
 

@@ -168,7 +168,7 @@ export default function Layout({
           <RoutesHandler />
           <UserInfoButton />
         </div>
-        <Suspense fallback={<h1>Loading...</h1>}>
+        <Suspense fallback={null}>
           <BodyLayout>{children}</BodyLayout>
         </Suspense>
       </div>

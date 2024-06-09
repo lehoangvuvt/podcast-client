@@ -30,7 +30,7 @@ const FavouritesEpisodes = () => {
   return (
     <div
       style={{
-        marginTop: "-95px",
+        marginTop: "-55px",
         zIndex: 99,
         position: "absolute",
       }}

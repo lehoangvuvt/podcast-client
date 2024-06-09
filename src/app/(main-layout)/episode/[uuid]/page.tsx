@@ -1,6 +1,7 @@
 import EpisodesSevice from "@/services/episodes.service";
 import EpisodeDetailsView from "./view";
 import { Metadata } from "next";
+import { notFound } from "next/navigation";
 
 type Props = {
   params: { uuid: string };
@@ -21,7 +22,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 }
 const EpisodeDetailsPage = async ({ params }: { params: { uuid: string } }) => {
   const response = await EpisodesSevice.GetEpisodeDetails(params.uuid);
-  if (response.status === "fail") return <h1>Not found...</h1>;
+  if (response.status === "fail") return notFound();
   const episodeDetails = response.data.episode_details;
   return (
     <EpisodeDetailsView key={episodeDetails.id} details={episodeDetails} />

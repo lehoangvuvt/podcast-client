@@ -2,8 +2,8 @@ export const routes = {
   HOME: "/",
   SEARCH: "/search",
   GENRES: "/genres",
-  EPISODES: "/episodes",
-  PODCASTS: "/podcasts",
+  EPISODES: "/episode",
+  PODCASTS: "/podcast",
   FAVOURITES: {
     EPISODES: "/favourites/episodes",
   },

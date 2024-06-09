@@ -95,7 +95,9 @@ const EpisodeItem: React.FC<Props> = ({
             </div>
 
             <div className="text-[#121212)] text-[0.8rem] font-semibold pt-[10px]">
-              {moment(episode.created_at).format("DD/MM/YYYY")}
+              {mode === "HOME_FEED_1"
+                ? moment(episode.created_at).fromNow()
+                : moment(episode.created_at).format("DD/MM/YYYY")}
             </div>
           </div>
         </div>
@@ -181,7 +183,7 @@ const EpisodeItem: React.FC<Props> = ({
                 paddingBottom: "20px",
               }}
             >
-              {episode.episode_desc}
+              {episode.episode_desc.substring(0, 200)}...
             </div>
           </div>
 
@@ -194,7 +196,7 @@ const EpisodeItem: React.FC<Props> = ({
         <div
           className={twMerge(
             "w-full",
-            "h-[80px]",
+            "h-[40px]",
             "flex flex-row",
             "items-center",
             "justify-end"

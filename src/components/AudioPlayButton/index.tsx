@@ -17,7 +17,7 @@ import PlayArrowIcon from "@mui/icons-material/PlayArrow";
 import PauseIcon from "@mui/icons-material/Pause";
 import { twMerge } from "tailwind-merge";
 import Lottie from "react-lottie";
-import * as animationData from "@/lotties/spectrum-blue-lottie.json";
+import * as animationData from "@/lotties/spectrum-lottie.json";
 import { useState } from "react";
 
 type Props = {

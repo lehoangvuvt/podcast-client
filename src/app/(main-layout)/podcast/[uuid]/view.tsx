@@ -5,6 +5,7 @@ import EpisodeItem from "@/components/EpisodeItem";
 import { PodcastDetails } from "@/types/apiResponse";
 import { FastAverageColor } from "fast-average-color";
 import { useEffect, useRef, useState } from "react";
+import { twMerge } from "tailwind-merge";
 
 type Props = {
   details: PodcastDetails;
@@ -32,25 +33,22 @@ const PodcastDetailsView: React.FC<Props> = ({ details }) => {
   return (
     <div
       style={{
-        marginTop: "-95px",
+        marginTop: "-55px",
         zIndex: 99,
         position: "absolute",
       }}
       className="w-full flex flex-col"
     >
       <div
-        className="w-full h-[300px] flex flex-row items-center p-[30px] gap-[30px]"
+        className="w-full flex flex-row flex-wrap items-center p-[30px] gap-[30px]"
         style={{
           backgroundAttachment: "fixed",
+          aspectRatio: 25 / 9,
           backgroundImage: `linear-gradient(to bottom, ${dominantColor} 10%, black)`,
         }}
       >
         <img
-          style={{
-            objectFit: "cover",
-            objectPosition: "center",
-          }}
-          className="h-[85%] aspect-square rounded-[5px] shadow-xl"
+          className="h-[200px] w-[200px] rounded-[5px] shadow-xl"
           crossOrigin="anonymous"
           ref={thumbnailImgRef}
           src={details.thumbnail_url}
@@ -61,6 +59,35 @@ const PodcastDetailsView: React.FC<Props> = ({ details }) => {
             {details?.podcast_name}
           </div>
         </div>
+      </div>
+      <div
+        className={twMerge(
+          "w-full",
+          "text-[rgba(0,0,0,0.8)] text-[2rem] font-extrabold uppercase",
+          "px-[25px] pt-[30px]",
+          "leading-10"
+        )}
+      >
+        Introduce
+      </div>
+      <div
+        className={twMerge(
+          "w-[100%]",
+          "text-[rgba(0,0,0,0.7)] text-[1rem] font-medium",
+          "pl-[25px] pr-[200px] pt-[25px] pb-[30px]"
+        )}
+      >
+        {details.podcast_desc}
+      </div>
+      <div
+        className={twMerge(
+          "w-full",
+          "text-[rgba(0,0,0,0.8)] text-[2rem] font-extrabold uppercase",
+          "px-[25px] pt-[20px] pb-[30px]",
+          "leading-10"
+        )}
+      >
+        {details.episodes.length} Episodes
       </div>
       <div
         style={{
