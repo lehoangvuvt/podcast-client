@@ -113,7 +113,7 @@ const AddToFavButton: React.FC<Props> = ({ type, itemId }) => {
         hideProgressBar
         autoClose={500}
         transition={Flip}
-        theme="colored"
+        theme="dark"
         style={{
           position: "fixed",
           zIndex: 1000,

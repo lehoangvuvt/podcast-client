@@ -2,6 +2,7 @@
 "use client";
 
 import EpisodeItem from "@/components/EpisodeItem";
+import SocialBar from "@/components/SocialBar";
 import { PodcastDetails } from "@/types/apiResponse";
 import { FastAverageColor } from "fast-average-color";
 import { useEffect, useRef, useState } from "react";
@@ -58,13 +59,20 @@ const PodcastDetailsView: React.FC<Props> = ({ details }) => {
           <div className="text-[white] font-bold text-[45px]">
             {details?.podcast_name}
           </div>
+          <div className="w-full -ml-[15px] pt-[5px]">
+            <SocialBar
+              fontSize="0.8rem"
+              color="rgba(255,255,255,0.95)"
+              itemURL={window.location.href}
+            />
+          </div>
         </div>
       </div>
       <div
         className={twMerge(
           "w-full",
           "text-[rgba(0,0,0,0.8)] text-[2rem] font-extrabold uppercase",
-          "px-[25px] pt-[30px]",
+          "px-[25px] pt-[25px]",
           "leading-10"
         )}
       >

@@ -1,6 +1,24 @@
 import PodcastsService from "@/services/podcasts.service";
 import PodcastDetailsView from "./view";
 import { notFound } from "next/navigation";
+import { Metadata } from "next";
+type Props = {
+  params: { uuid: string };
+};
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const response = await PodcastsService.GetPodcastDetails(params.uuid);
+  let title = "New Podcast";
+  let description = "My podcast description";
+  if (response.status === "success") {
+    title = response.data.podcast_details.podcast_name;
+    description = response.data.podcast_details.podcast_desc;
+  }
+  return {
+    title,
+    description,
+  };
+}
 
 const PodcastDetailsPage = async ({ params }: { params: { uuid: string } }) => {
   const response = await PodcastsService.GetPodcastDetails(params.uuid);

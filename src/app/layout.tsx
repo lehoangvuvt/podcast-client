@@ -8,8 +8,8 @@ import AuthWrapper from "@/middlewares/authWrapper";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Podcast Today",
-  description: "Podcast Today",
+  title: "Healing Journey Podcasts",
+  description: "Healing Journey Podcasts",
 };
 
 export default function RootLayout({

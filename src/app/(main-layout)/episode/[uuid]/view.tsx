@@ -5,6 +5,7 @@ import AddToFavButton from "@/components/AddToFavButton";
 import AudioPlayButton from "@/components/AudioPlayButton";
 import EpisodeItem from "@/components/EpisodeItem";
 import MySkeleton, { SHAPE_ENUMS } from "@/components/Skeleton";
+import SocialBar from "@/components/SocialBar";
 import AuthConditionalRenderWrapper from "@/middlewares/authConditionalRenderWrapper";
 import useRelativeEpisodes from "@/react-query/hooks/useRelativeEpisodes";
 import { PodcastEpisodeDetails } from "@/types/apiResponse";
@@ -60,6 +61,10 @@ const EpisodeDetailsView: React.FC<Props> = ({ details }) => {
             <AuthConditionalRenderWrapper required>
               <AddToFavButton type="episode" itemId={details.id} />
             </AuthConditionalRenderWrapper>
+          </div>
+
+          <div className="w-full">
+            <SocialBar itemURL={window.location.href} />
           </div>
         </div>
       </div>
